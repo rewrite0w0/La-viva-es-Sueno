@@ -5,7 +5,7 @@ authors: rewrite0w0
 tags: [javascript, 번역]
 ---
 
-# [JS에서 [1, 2, 3]+[4, 5, 6]은 왜 "1,2,34,5,6"인가?](https://sosukesuzuki.dev/posts/array-plus-array/)
+> [글](https://sosukesuzuki.dev/posts/array-plus-array/)
 
 이런 트윗을 봤다.
 

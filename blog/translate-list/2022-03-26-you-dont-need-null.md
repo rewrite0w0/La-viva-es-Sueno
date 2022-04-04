@@ -5,7 +5,7 @@ authors: rewrite0w0
 tags: [you don't need, javascript, 번역]
 ---
 
-# You don't need null
+> [글](https://dev.to/vangware/you-dont-need-null-3m4n)
 
 "nullish" 타입(`null`, `nil`, 등등)을 갖고 있는 프로그래밍 언어가 이걸 회피하기 위한 논의가 늘 진행됩니다.
 JavaScript는 인기있는 언어 중에서 Nullish 타입을 **둘** 갖고 있는 유일한 언어입니다. 가장 권해지는 방법은 하나만 사용하는 것인데 저는 `undefiend`만 사용하고, `null`은 쓰지 않도록 하고 있습니다.

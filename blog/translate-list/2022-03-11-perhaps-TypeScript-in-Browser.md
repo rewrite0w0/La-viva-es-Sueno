@@ -5,7 +5,7 @@ authors: rewrite0w0
 tags: [javascript, typescript, proposal, ECMAScript, 번역]
 ---
 
-# [TypeScript가 브라우저로 들어올지도 모릅니다.](https://qiita.com/access3151fq/items/85b34a395e8268dd518a)
+> [글](https://qiita.com/access3151fq/items/85b34a395e8268dd518a)
 
 어쩌면 `TypeScript`가 `JavaScript`로 들어와 브라우저에서 바로 `TypeScript`를 사용할 수 있을지도 모릅니다.
 

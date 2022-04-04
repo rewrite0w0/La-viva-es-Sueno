@@ -1,11 +1,9 @@
 ---
 slug: translate-list-without-blog
-title: 블로그에 없는 번역
+title: 블로그에 없는 글
 authors: rewrite0w0
 tags: [번역]
 ---
-
-# 혼자보려 만드는 글 / 번역
 
 ## 글
 

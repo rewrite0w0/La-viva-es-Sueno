@@ -5,7 +5,7 @@ authors: rewrite0w0
 tags: [you don't need, javascript, 번역]
 ---
 
-# [You don't need classes](https://dev.to/vangware/you-don-t-need-classes-jk4)
+> [글](https://dev.to/vangware/you-don-t-need-classes-jk4)
 
 몇 년전, JavaScript에 기다리고 기다리던 클래스가 추가됐습니다. 고전적 객체지향 패러다임을 갖는 다른 언어에서 온 개발자는 JS에 오랜 친구가 있어 기뻐했죠. 그런데 말입니다. 클래스가 어떤 기능을 하는가 봅시다. 그리고 왜 클래스가 필요없는지도요.
 

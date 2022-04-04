@@ -5,7 +5,7 @@ authors: rewrite0w0
 tags: [test, unit test, 번역]
 ---
 
-# [유닛테스트를 권함](https://zenn.dev/suzuki_hoge/books/2020-12-small-unit-test-65625504e7be1532413f)
+> [글](https://zenn.dev/suzuki_hoge/books/2020-12-small-unit-test-65625504e7be1532413f)
 
 ## 큰 테스트의 비용과 위험
 

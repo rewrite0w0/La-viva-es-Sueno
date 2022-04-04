@@ -5,8 +5,6 @@ authors: rewrite0w0
 tags: [javascript, closure, functional programming, 감상]
 ---
 
-# 클로저가 알고 싶어
-
 다음과 같은 글을 읽었다.
 
 [Javascript Closure는 Private 변수 만드는 용도인가?](https://medium.com/naver-place-dev/javascript-closure%EB%8A%94-private-%EB%B3%80%EC%88%98-%EB%A7%8C%EB%93%9C%EB%8A%94-%EC%9A%A9%EB%8F%84%EC%9D%B8%EA%B0%80-d5868489c421)

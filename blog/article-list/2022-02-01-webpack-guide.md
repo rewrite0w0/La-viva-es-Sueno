@@ -5,8 +5,6 @@ authors: rewrite0w0
 tags: [npm, webpack, 감상]
 ---
 
-# webpack 메모 (guides)
-
 [webpack 가이드](https://webpack.kr/guides/getting-started/)를 따라간다.
 
 **윈도우10 기준**

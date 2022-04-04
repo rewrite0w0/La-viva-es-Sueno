@@ -5,7 +5,6 @@ authors: rewrite0w0
 tags: [javascript, Optimization, 번역]
 ---
 
-# 2021년에 알아뒀으면 하면 34개의 JavaScript 최적화 기술
 
 > [글](https://javascript.plainenglish.io/34-javascript-optimization-techniques-to-know-in-2021-d561afdf73c3)이 삭제되어 있는 상태
 > 최신의 생략 테크닉, 기술, 비결을 사용해 JavaScript 코드를 최적화 한다

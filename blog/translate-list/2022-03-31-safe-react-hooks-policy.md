@@ -5,7 +5,7 @@ authors: rewrite0w0
 tags: [react, react hooks, maintenance, 번역]
 ---
 
-# [보수하기 쉬운 React Hooks 코드 방침](https://zenn.dev/haniwa_www/articles/8ebacbd8e24321)
+> [글](https://zenn.dev/haniwa_www/articles/8ebacbd8e24321)
 
 ## 전제
 

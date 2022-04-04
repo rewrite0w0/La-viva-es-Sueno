@@ -5,7 +5,7 @@ authors: rewrite0w0
 tags: [ms, startup, 번역]
 ---
 
-# [Microsoft for Startups Founders Hub 투자없이도 이용가능](https://blogs.microsoft.com/blog/2022/03/08/microsoft-for-startups-founders-hub-now-open-to-all-no-funding-needed/)
+> [글](https://blogs.microsoft.com/blog/2022/03/08/microsoft-for-startups-founders-hub-now-open-to-all-no-funding-needed/)
 
 > 2022/03/08
 >

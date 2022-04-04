@@ -5,8 +5,6 @@ authors: rewrite0w0
 tags: [javascript, beginner, secrets, 감상]
 ---
 
-# JS문서를 읽으며 느낀 비기들
-
 ## image/iframes
 
 `loading = "lazy"`

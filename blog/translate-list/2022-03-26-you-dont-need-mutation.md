@@ -5,7 +5,7 @@ authors: rewrite0w0
 tags: [you don't need, javascript, 번역]
 ---
 
-# [You don't need mutation](https://dev.to/vangware/you-don-t-need-variables-2gk3)
+> [글](https://dev.to/vangware/you-don-t-need-variables-2gk3)
 
 > 실제제목...
 >

@@ -5,7 +5,7 @@ authors: rewrite0w0
 tags: [react, 번역]
 ---
 
-# [이제와서 알아보는 React v18](https://zenn.dev/reo777/articles/c0420a2bad2e6b)
+> [글](https://zenn.dev/reo777/articles/c0420a2bad2e6b)
 
 React Conf 영상을 보며 사내 10분 공부회에서 공유한 자료입니다.
 
@@ -21,7 +21,7 @@ React Conf 영상을 보며 사내 10분 공부회에서 공유한 자료입니�
 - useDefferedValue hook
 - startTransition
 
-글에서는 React18보다 Suspence 이야기가 주가 되겠네요
+글에서는 React18보다 suspense 이야기가 주가 되겠네요
 
 ## Suspense에 의해 무엇이 변하는가
 
@@ -78,11 +78,11 @@ function ProfileTimeline() {
 }
 ```
 
-## Suspence
+## suspense
 
 - 한 줄 요약: 컴포넌트가 Promise를 던질 수 있어서 UX 초상승
 
-### Server rendering With Suspence
+### Server rendering With suspense
 
 **SSR**
 

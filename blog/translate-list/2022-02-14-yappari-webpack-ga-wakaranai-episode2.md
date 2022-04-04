@@ -5,7 +5,7 @@ authors: rewrite0w0
 tags: [npm, webpack, 번역]
 ---
 
-# [역시 webpack이 뭔지 모르겠다. (에피소드2)](https://zenn.dev/antez/articles/638382faa06bd7)
+> [글](https://zenn.dev/antez/articles/638382faa06bd7)
 
 ## 들어가기
 

@@ -5,7 +5,7 @@ authors: rewrite0w0
 tags: [recoil, react, typescript, state management, 번역]
 ---
 
-# [(TS) 이제와서 묻기 애매한 recoil](https://zenn.dev/nekoniki/articles/406087e43f4865)
+> [글](https://zenn.dev/nekoniki/articles/406087e43f4865)
 
 ## 머릿말
 

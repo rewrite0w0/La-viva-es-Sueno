@@ -5,8 +5,6 @@ authors: rewrite0w0
 tags: [npm, webpack, 감상]
 ---
 
-# webpack 메모 (concepts)
-
 [webpack](https://webpack.kr/concepts/) 사이트를 읽으며 느낀 점을 적는 곳.
 계속 추가될 수도 있다.
 

@@ -5,7 +5,7 @@ authors: rewrite0w0
 tags: [you don't need, javascript, 번역]
 ---
 
-# [You don't need if](https://dev.to/vangware/you-dont-need-if-37f1)
+> [글](https://dev.to/vangware/you-dont-need-if-37f1)
 
 내 고등학생의 마지막 학년, 첫날이었다.
 새로 온 프로그래밍 선생님이 도착했고, 잠시 침묵하시더니 수업을 시작했다.

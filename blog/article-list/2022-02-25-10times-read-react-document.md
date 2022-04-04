@@ -5,8 +5,6 @@ authors: rewrite0w0
 tags: [react, 감상]
 ---
 
-# react hook 문서를 10번 읽은 시점에서 정리
-
 ## reack hook에서 쓰는 JavaScript의 부분들
 
 - 클로저

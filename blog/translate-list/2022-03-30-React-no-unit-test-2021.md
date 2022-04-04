@@ -5,7 +5,7 @@ authors: rewrite0w0
 tags: [react, test, unit test, 번역]
 ---
 
-# [React 유닛테스트 2021](https://zenn.dev/erukiti/articles/unit-testing-react-2021)
+> [글](https://zenn.dev/erukiti/articles/unit-testing-react-2021)
 
 React 유닛테스트할 때, 좋은 방법은 언제나 고민되는 것이지만 우선 2021년 2월 시점에는 이게 제일 좋다 느낀 걸 정리했습니다.
 

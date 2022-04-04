@@ -15,7 +15,6 @@ const config = {
   favicon: 'img/rw.ico',
   organizationName: 'rewrite0w0', // Usually your GitHub org/user name.
   projectName: 'La-viva-es-Sueno', // Usually your repo name.
-  deploymentBranch: 'gh-pages',
   trailingSlash: false,
 
   presets: [

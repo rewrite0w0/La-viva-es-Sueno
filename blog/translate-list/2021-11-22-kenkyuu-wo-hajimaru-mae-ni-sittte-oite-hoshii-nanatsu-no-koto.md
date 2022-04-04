@@ -5,7 +5,7 @@ authors: rewrite0w0
 tags: [mindset, 번역]
 ---
 
-# [연구하기 전에 알아두면 좋은 7가지](https://speakerdeck.com/kaityo256/welcome-to-lab)
+> [글](https://speakerdeck.com/kaityo256/welcome-to-lab)
 
 ![title don!](../../static/img/kenkyuu-wo-hajimaru-mae-ni-sittte-oite-hoshii-nanatsu-no-koto/slide1.PNG)
 

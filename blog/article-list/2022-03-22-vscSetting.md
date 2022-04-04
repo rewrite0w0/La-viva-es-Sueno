@@ -5,8 +5,6 @@ authors: rewrite0w0
 tags: [vsc, setting, git, 감상]
 ---
 
-# vsc 설치후 바로하는 세팅
-
 **확장 기능**
 
 - ESLint

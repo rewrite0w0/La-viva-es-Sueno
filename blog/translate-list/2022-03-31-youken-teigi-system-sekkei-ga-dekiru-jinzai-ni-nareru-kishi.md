@@ -5,7 +5,7 @@ authors: rewrite0w0
 tags: [design, 번역]
 ---
 
-# [요건정의 ~ 시스템 설계까지 할 수 있는 인재가 되는 글](https://qiita.com/Saku731/items/741fcf0f40dd989ee4f8)
+> [글](https://qiita.com/Saku731/items/741fcf0f40dd989ee4f8)
 
 ## 첫 머리
 

@@ -5,7 +5,7 @@ authors: rewrite0w0
 tags: [mindset, 번역]
 ---
 
-# [엔지니어가 열등감과 마주하는 방법](https://qiita.com/karamage/items/771b633c3243989418a2)
+> [글](https://qiita.com/karamage/items/771b633c3243989418a2)
 
 ## 첫 머리
 

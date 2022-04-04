@@ -5,7 +5,7 @@ authors: rewrite0w0
 tags: [npm, node.js, 번역]
 ---
 
-# [애초에 npm부터 뭔지 모르겠다.](https://zenn.dev/antez/articles/a9d9d12178b7b2)
+> [글](https://zenn.dev/antez/articles/a9d9d12178b7b2)
 
 ## 들어가기
 

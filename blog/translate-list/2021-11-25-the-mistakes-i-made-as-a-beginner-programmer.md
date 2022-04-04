@@ -1,13 +1,11 @@
 ---
 slug: the-mistakes-i-made-as-a-beginner-programmer
-title: 초보 프로그래머가 범하는 실수들
+title: 초보 프로그래머가 범하는 실수들(The Mistakes I Made As a Beginner Programmer)
 authors: rewrite0w0
 tags: [mindset, beginner, 번역]
 ---
 
-# [초보 프로그래머가 범하는 실수들](https://medium.com/edge-coders/the-mistakes-i-made-as-a-beginner-programmer-ac8b3e54c312)
-
-# The Mistakes I Made As a Beginner Programmer
+> [글](https://medium.com/edge-coders/the-mistakes-i-made-as-a-beginner-programmer-ac8b3e54c312)
 
 초보 프로그래머 범하는 실수들을 특정해 그것을 피하는 습관을 배우는 방법.
 

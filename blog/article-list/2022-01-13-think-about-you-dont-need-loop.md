@@ -5,8 +5,6 @@ authors: rewrite0w0
 tags: [you don't, javascript, 감상]
 ---
 
-# You Don't Need Loops 번역 후, 감상
-
 [You Don't Need Loops](https://github.com/you-dont-need/You-Dont-Need-Loops)를 읽고 [You Don't Need Loops 한국어판](https://github.com/you-dont-need/You-Dont-Need-Loops/blob/master/readme_kr.md)을 만들었다.
 
 글에 **"if 대신 삼항식을 사용하는 이유"** 대목을 보았는데,

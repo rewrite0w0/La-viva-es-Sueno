@@ -5,7 +5,6 @@ authors: rewrite0w0
 tags: [npm, security, 번역]
 ---
 
-# peacenotwar, node-ipc에 악의적 코드를 메인테이너가 넣었다
 
 [경고(CVE-2022-23812): 우크라이나 침공의 대항목적으로 peacenotwar 모듈이 node-ipc 패키지를 통해 npm 개발자를 훼방](https://qiita.com/SnykSec/items/6e75bd78b4deb3371550)
 

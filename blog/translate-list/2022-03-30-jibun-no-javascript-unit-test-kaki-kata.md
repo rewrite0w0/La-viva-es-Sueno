@@ -5,7 +5,7 @@ authors: rewrite0w0
 tags: [javascript, test, unit test, 번역]
 ---
 
-# [(자신만의) JavaScript 유닛테스트 작성 방법](https://zenn.dev/mizchi/articles/my-test-policy)
+> [글](https://zenn.dev/mizchi/articles/my-test-policy)
 
 (사내용 문서 공개판)
 
