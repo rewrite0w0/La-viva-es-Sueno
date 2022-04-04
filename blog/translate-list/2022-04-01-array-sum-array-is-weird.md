@@ -9,7 +9,7 @@ tags: [javascript, 번역]
 
 이런 트윗을 봤다.
 
-> I have been writing Javascript since roughly 1997 but it still manages to occasionally do something that absolutely shocks me [pic.twitter.com/JyYOo4wGOu](pic.twitter.com/JyYOo4wGOu) — mcc (@mcclure111) [2022/01/11](https://twitter.com/mcclure111/status/1481027678362902528?ref_src=twsrc%5Etfw)
+> I have been writing Javascript since roughly 1997 but it still manages to occasionally do something that absolutely shocks me [pic.twitter.com/JyYOo4wGOu](https://pic.twitter.com/JyYOo4wGOu) — mcc (@mcclure111) [2022/01/11](https://twitter.com/mcclure111/status/1481027678362902528?ref_src=twsrc%5Etfw)
 
 JavaScript에서 `[1, 2, 3] + [4, 5, 6]`은 `"1,2,34,5,6"`이며, 직감에 반하기에 나온 반응이었다.
 
@@ -31,7 +31,7 @@ JavaScript에서 `[1, 2, 3] + [4, 5, 6]`가 `"1,2,34,5,6"`로 되는 이유는 �
 
 `+` 연산자 동작이 어떤 식으로 정해져있는가 보자.
 
-`+` 연산자는 [The Addition Operator](The Addition Operator)에 정의되어 있다.
+`+` 연산자는 [The Addition Operator](https://tc39.es/ecma262/#sec-addition-operator-plus)에 정의되어 있다.
 
 구문에 대해서는 다들 알 테니 글의 주제에 벗어나니 무시하고, 세멘틱을 보자. 여기에서 다음과 같은 세멘틱이 정의되어 있다.
 
@@ -45,7 +45,7 @@ JavaScript에서 `[1, 2, 3] + [4, 5, 6]`가 `"1,2,34,5,6"`로 되는 이유는 �
 
 ## EvaluateStringOrNumericBinaryExpression
 
-`EvaluateStringOrNumericBinaryExpression`은 https://tc39.es/ecma262/#sec-evaluatestringornumericbinaryexpression에 정의되어 있다.
+`EvaluateStringOrNumericBinaryExpression`은 [https://tc39.es/ecma262/#sec-evaluatestringornumericbinaryexpression](https://tc39.es/ecma262/#sec-evaluatestringornumericbinaryexpression)에 정의되어 있다.
 
 Abstract Operation은 `leftOperand`, `opText`, `rightOperand` 인수를 받는다.
 3개의 인수는 다음과 같이 동작한다

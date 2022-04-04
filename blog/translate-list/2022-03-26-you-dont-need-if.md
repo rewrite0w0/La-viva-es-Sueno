@@ -2,7 +2,7 @@
 slug: you-dont-need-if
 title: You don't need if
 authors: rewrite0w0
-tags: [you don't, javascript, 번역]
+tags: [you don't need, javascript, 번역]
 ---
 
 # [You don't need if](https://dev.to/vangware/you-dont-need-if-37f1)

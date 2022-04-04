@@ -9,7 +9,7 @@ tags: [npm, webpack, 번역]
 
 ## 들어가기
 
-이 글은 [역시 webpack이 뭔지 모르겠다. (에피소드1)](./yappari-webpack-ga-wakaranai-episode1.md)에서 이어집니다. [애초에 npm이 뭔지 모르겠다](https://zenn.dev/antez/articles/a9d9d12178b7b2)도 참고해주시길 바랍니다.
+이 글은 [역시 webpack이 뭔지 모르겠다. (에피소드1)](./2022-01-30-yappari-webpack-ga-wakaranai-episode1.md)에서 이어집니다. [애초에 npm이 뭔지 모르겠다](https://zenn.dev/antez/articles/a9d9d12178b7b2)도 참고해주시길 바랍니다.
 
 > webpack를 사용하면 빌드, 디플로이 등 같은 단어가 빈번하게 등장합니다. **빌드**란 복수의 파일을 모아 실행가능한 파일로 만드는 것으로, webpack은 `webpack` 명령어로 파일을 만들 수 있습니다. 디폴로이란 그 실행 가능한 파일을 실행할 환경에 설치, 실행하는 것입니다. 예를 들면 webpack은 빌드한 파일을 서버에 두어 실행하는 것입니다.
 
@@ -88,7 +88,7 @@ module.exports = {
 이 글의 제목은 [역시 webpack이 뭔지 모르겠다]인데, **지금부터가 뭔지 모르겠다 입니다.** 이 시점부터 `webpack.config.js`가 무지하게 복잡해집니다.
 
 위에 설정이 어떻게 돌아가는 것인지 한 눈에 들어오시나요?
-[에피소드1](./yappari-webpack-ga-wakaranai-episode1.md)에서 설명했지만, **webpack 설정은 그저 프로퍼티에 값을 설정할 뿐**입니다.
+[에피소드1](./2022-01-30-yappari-webpack-ga-wakaranai-episode1.md)에서 설명했지만, **webpack 설정은 그저 프로퍼티에 값을 설정할 뿐**입니다.
 
 예시를 들면 이렇습니다. 잘 읽어주세요.
 

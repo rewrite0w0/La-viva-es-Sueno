@@ -2,7 +2,7 @@
 slug: you-dont-need-classes
 title: You don't need classes
 authors: rewrite0w0
-tags: [you don't, javascript, 번역]
+tags: [you don't need, javascript, 번역]
 ---
 
 # [You don't need classes](https://dev.to/vangware/you-don-t-need-classes-jk4)

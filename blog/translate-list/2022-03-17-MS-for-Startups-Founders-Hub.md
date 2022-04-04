@@ -15,7 +15,7 @@ tags: [ms, startup, 번역]
 
 마이크로소프트는 파트너와 고객의 성공을 위해 건전한 에코시스템 구축과 유지를 목표로 하고 있습니다. 스타트업 기업은 그 파릇함을 바탕으로 에코시스템 전체를 움직이게함으로 반드시 필요한 존재이며, 에코시스템 번영에도 무척 중요한 역할을 맡고 있습니다. 하지만 이노베이션과 성장에 반드시 필요한 존재임에도 불구하고 [추정](https://www.investopedia.com/articles/personal-finance/040915/how-many-startups-fail-and-why.asp)에 의하면 스타트업 기업의 90% 이상이 창업 1년 이내에 사라집니다.
 
-이러한 점에서 마이크로소프트는 스타트업 기업이 성공하기 위해서 특히 창업 직후에 반드시 필요한 것에 대해 깊게 생각했습니다. 거래서 전 세계의 다양한 배경을 갖는 수 천명이 넘는 기업가에게 피드백을 기반으로 [Microsoft for Startups Founders Hub](http://startups.microsoft.com/)를 연 것을 무척 자랑스럽게 생각하고 있습니다. 아이디어만 있다면 누구라도 참가할 수 있는 이 플랫폼은 스타트업 기업이 직면하고 있는 최우선 과제를 해결하기 위해 만들었기 때문입니다.
+이러한 점에서 마이크로소프트는 스타트업 기업이 성공하기 위해서 특히 창업 직후에 반드시 필요한 것에 대해 깊게 생각했습니다. 거래서 전 세계의 다양한 배경을 갖는 수 천명이 넘는 기업가에게 피드백을 기반으로 [Microsoft for Startups Founders Hub](https://startups.microsoft.com/)를 연 것을 무척 자랑스럽게 생각하고 있습니다. 아이디어만 있다면 누구라도 참가할 수 있는 이 플랫폼은 스타트업 기업이 직면하고 있는 최우선 과제를 해결하기 위해 만들었기 때문입니다.
 
 Microsoft for Startups Founders Hub는 3가지 요소가 중심입니다.
 
@@ -61,8 +61,8 @@ Microsoft의 클라우드 + AI 부회장 Scott Guthrie는 말합니다.
 
 - **스타트업 기업에 특화한 연수:** 창업가 여러분 모두는 신흥 기업 특유의 니즈에 대응하기 위한 학습 코드, 이벤트, 컨텐츠를 이용할 수 있습니다.
 
-Microsoft는 아이디어를 갖은 모든 사람의 아이디어 실현을 돕고 싶습니다. 지금 Microsoft for Startups Founders Hub에 가입해서 개발을 해보세요.
-[startups.microsoft.com](startups.microsoft.com.)
+Microsoft는 아이디어를 갖은 모든 사람의 아이디어 실현을 돕고 싶습니다. 지금 Microsoft for Startups Founders Hub에 가입해서 개발 해보세요.
+[startups.microsoft.com](https://startups.microsoft.com/)
 
 ---
 

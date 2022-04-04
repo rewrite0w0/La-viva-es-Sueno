@@ -2,7 +2,7 @@
 slug: you-dont-need-mutation
 title: You don't need mutation
 authors: rewrite0w0
-tags: [you don't, javascript, 번역]
+tags: [you don't need, javascript, 번역]
 ---
 
 # [You don't need mutation](https://dev.to/vangware/you-don-t-need-variables-2gk3)
@@ -189,7 +189,7 @@ DOM API는 변이덩어리인데, Web 애플리케이션에서 동적으로 무�
 
 ## 클래스와 변이
 
-이 글은 [You don't need classes](./you-don't-need-classes.md) 시리즈로 꽤 닮은 내용입니다. 클래스는 보통 클래스 내부 값을 보존하고 변경하는 방법이 추천됩니다. 그렇기에 이는 클래스를 피하고 대신 순수한 함수와 값을 사용해야하는 이유입니다.
+이 글은 [You don't need classes](./2022-03-26-you-dont-need-classes.md) 시리즈로 꽤 닮은 내용입니다. 클래스는 보통 클래스 내부 값을 보존하고 변경하는 방법이 추천됩니다. 그렇기에 이는 클래스를 피하고 대신 순수한 함수와 값을 사용해야하는 이유입니다.
 만약 클래스를 사용하더라도 새 값을 포함한 새 클래스 인스턴스를 반환함으로 변이를 피할 수 있도록 합시다.
 
 ## 퍼포먼스는?

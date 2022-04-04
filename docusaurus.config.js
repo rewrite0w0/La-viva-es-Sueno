@@ -15,6 +15,7 @@ const config = {
   favicon: 'img/rw.ico',
   organizationName: 'rewrite0w0', // Usually your GitHub org/user name.
   projectName: 'La-viva-es-Sueno', // Usually your repo name.
+  deploymentBranch: 'gh-pages',
   trailingSlash: false,
 
   presets: [
@@ -25,12 +26,12 @@ const config = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
-          editUrl: 'https://github.com/rewrite0w0/La-viva-es-Sueno',
+          // editUrl: 'https://github.com/rewrite0w0/La-viva-es-Sueno',
         },
         blog: {
           showReadingTime: true,
           // Please change this to your repo.
-          editUrl: 'https://github.com/rewrite0w0/La-viva-es-Sueno',
+          // editUrl: 'https://github.com/rewrite0w0/La-viva-es-Sueno',
           // blogSidebarTitle: 'All posts',
           blogSidebarCount: 'ALL',
         },
