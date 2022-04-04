@@ -1,0 +1,477 @@
+---
+slug: try-make-myLint
+title: 나만의 ESLint 규칙을 만들어보았다.
+authors: rewrite0w0
+tags: [eslint, npm, 번역]
+---
+
+# [나만의 ESLint 규칙을 만들어보았다.](https://zenn.dev/mkpoli/articles/fce02f0f4d45fa)
+
+[PaletteWorks Editor](https://paletteworks.mkpo.li/) 개발중에 어떤 버그가 있어 수정하려 코드를 자세히는 아니어도 대강 5번 정도 읽었지만 찾지못한 `concat()`이라는 사악한 녀석이 있습니다.
+![code with concat](https://storage.googleapis.com/zenn-user-upload/5b595f8a8d75-20220218.png)
+
+따로 염두하며 보며 괜찮었겠지만, 염두하지않고 보면 전혀 눈치채지 못하죠.
+아마 `filter`, `map`, `forEach`의 일종이라 뇌가 분류한 것일까요.
+어차피 `[...a, ...b]` 문법도 있어서, 이걸 사용하면 쉽게 알 수 있었을텐데 실제 개발도중에 딱히 염두하지 않다가, 저것으로 리팩토링한 적도 있습니다.
+
+![code refactoring](https://storage.googleapis.com/zenn-user-upload/fcdd0c03525c-20220218.png)
+
+리팩토링하면 이렇게 되는데 꽤 읽기 편해졌다 생각합니다.
+
+## 목표
+
+그래서, 실제로 ESlint를 만들어 `concat`를 소멸하려합니다.
+
+## TL;DR
+
+[레포지토리](https://github.com/mkpoli/eslint-plugin-no-array-concat)입니다. (Initial Commit에 코딩이 집중되어 있는건, 이것저것 건들여보아도 잘 돌아가지 않다가, 성공했을 때 commit 했기 때문입니다.)
+
+[NPM](https://www.npmjs.com/package/eslint-plugin-no-array-concat)
+
+## 사전 지식
+
+### ESLint란?
+
+JavaScript 검증도구입니다. 가끔 잘 못 적어도, 컴파일러가 별 말 없을 때도 있고, 컴파일하기 전에 (코드를 치면서) 눈치채고 싶으므로, 컴파일러와 다르게 코드의 정확성을 검증하기 위한 도구로 이용됩니다.
+
+보통 컴파일러의 에러, 문법 에러보다 세세한 부분을 엄격하게 하는 경우가 많은데, ESLint는 그것을 커스터마이즈할 수 있어 편리하죠.
+
+### AST
+
+[추상 구문 트리](https://ko.wikipedia.org/wiki/%EC%B6%94%EC%83%81_%EA%B5%AC%EB%AC%B8_%ED%8A%B8%EB%A6%AC)(abstract syntax tree)를 의미하며, 컴파일러나 파서가 사람이 적은 코드를 읽을 때 쓸모없는 것을 제거해, 문법만 읽을 수 있게 하는 것으로, ESLint가 파서에 의해 만들어진 AST를 근간으로 코드를 검증합니다.
+
+실제 TypeScript, Babel 같은 트랜스파일러도 AST 생성하고 있습니다.
+
+## ToDo
+
+### 필요한 것
+
+- eslint 플러그인 표준
+- npm 출시할 준비
+
+### 하면 좋을 것
+
+- TypeScript로 적어서 빌드 후에 출시
+- Jest로 테스트
+- 그 외 등등
+
+### 인프라
+
+우선 TypeScript + Jest 같은 인프라를 준비합시다.
+
+```bash
+pnpm i -D typescript @types/node
+pnpm i -D jest @types/jest ts-jest
+pnpm i -D npm-run-all rimraf np
+```
+
+([np](https://www.npmjs.com/package/np) 개발이 정체되어있고, 왜인지 최근 잘 안 돌아가는 것 같아서 release-it, publish-please, semantic-release 같은 것으로 할까 생각했지만 np를 다른 부분으로 바꾼 것 뿐이므로 그대로 하겠습니다.)
+
+```json
+// package.json
+{
+  "name": "eslint-plugin-no-array-concat",
+  "version": "0.0.0",
+  "description": "ESLint rule for not using Array.prototype.concat()",
+  "scripts": {
+    "clean": "rimraf dist",
+    "build:typescript": "tsc",
+    "build": "run-s clean build:typescript",
+    "test": "jest",
+    "publish": "np",
+    "release": "run-s clean build test publish"
+  }
+}
+```
+
+```json
+// tsconfig.json
+{
+  "compilerOptions": {
+    "target": "ES2015",
+    "module": "CommonJS",
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "types": ["node"],
+    "typeRoots": ["./"]
+  },
+  "include": ["src", "global.d.ts"],
+  "exclude": ["node_modules", "tests"]
+}
+```
+
+```json
+// tsconfig.test.json
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": true
+  },
+  "files": ["estree.ts"],
+  "include": ["tests/**/*.ts", "global.d.ts"]
+}
+```
+
+```js
+// jest.config.js
+module.exports = {
+  preset: 'ts-jest',
+  testMatch: ['**/tests/**/*.ts'],
+  globals: {
+    'ts-jest': {
+      tsconfig: './tsconfig.test.json',
+    },
+  },
+};
+```
+
+```shell
+# 폴더구조
+node_modules/
+dist/
+```
+
+![folder structure](https://storage.googleapis.com/zenn-user-upload/6933b2b0566b-20220218.png)
+
+## 문서를 쓴다
+
+우선 간단하게 [문서](https://github.com/mkpoli/eslint-no-array-concat/blob/master/docs/rules/no-array-concat.md)를 적어둡시다. `docs/rules/no-array-concat.md`
+
+간단한 동기, 목적, 검증되는 것과 검증되지 않는 것, 사용하지 않을 때, 리소스, 링크 등등 [공식 문서 구성](https://eslint.org/docs/rules/)을 참조하면 좋을 것이라 생각합니다.
+
+이것으로 알게된 것은 해야할 것이 Array 인스턴스가 concat를 호출할 때만 에러를 뿜으면 된다는 것입니다.
+
+## 문제 발생
+
+하지만 여기서 문제가 발생했습니다. Array 인스턴스, 혹은 Array 타입은 그 안에
+
+- Array 리터럴 `[1, 2, 3]`
+- Array 변수 `let a = [1, 2, 3]; a`
+- Array를 반환하는 것 `[1, 2, 3].map((x)=>x+1)`
+
+이런 것들이 있습니다.
+
+1번은 금방 Array라는 걸 알 수 있으니까 괜찮고, 3번도 어느정도는 괜찮은데 2번은 약간 거시기합니다. 그렇게하면 Array 이외의 다른 것과 `concat`을 구별하지 못하기 때문입니다. 게다가 예를 들어 Buffer 같은 concat 외에는 선택지가 없는 것도 있고, Array가 아닌 곳에서 concat를 사용하는 클래스 메서드도 있습니다.
+
+ESLint에는 변수에 타입을 판정하는 기능이 있지 않아서 공식에서 [만든](https://eslint.org/docs/rules/array-callback-return) `array-callback-return`에서도 단순하게 이름이 `map`, `filter`, `some`인 것을 이용해서 Array가 아닌 것에도 영향을 끼칩니다. 이 규칙이 권장되지 않는 이유 중 하나인 것 같습니다.
+
+어쩌죠.....
+
+## 해결
+
+JavaScript와 타입이라하면 TypeScript!
+TypeScript에는 타입 정보가 있습니다. 이를 이용하면 위에 언급한 것이 해결될 것 같지 않습니까?
+
+그러니 TypeScript 관련된 것은 어떻게 lint될까요.
+실은 [TypeScript ESLint](https://github.com/typescript-eslint/typescript-eslint)이라 하는 상당한 물건이 있습니다.
+실제 TypeScript 코드도 이걸 쓰면 간단하게 검증할 수 있습니다.
+
+ESLint에는 플러그인(규칙, 설정, 특수파일 처리)외에도파서를 지정할 수 있습니다. TypeScript ESLint에는 TypeScript(.ts) 파일을 해석하므로 플러그인 `@typescript-eslint/eslint-plugin`, 파서 `@typescript-eslint/parser` 둘 다 지정할 수 있습니다.
+
+여기에 더 굉장한 것은 `@typescript-eslint/parser`은 TypeScript가 아니라 JavaScript도 검증할 수 있으므로 `@typescript-eslint/parser`를 근간으로 만든 플러그인은 소소한 설정(.tsconfig / .eslintrc)만으로 JavaScript 프로젝트를 lint 할 수 있습니다.
+
+![example @typescript-eslint/parser lint javascript](https://storage.googleapis.com/zenn-user-upload/d332c3908476-20220218.png)
+
+## 실제로 만들어보자
+
+### 설치
+
+```bash
+pnpm i -D @typescript-eslint/parser
+pnpm install @typescript-eslint/utils eslint-ast-utils
+```
+
+### 준비
+
+![new file structure](https://storage.googleapis.com/zenn-user-upload/310f15cd403a-20220218.png)
+
+위와 같이 구성이 되도록 파일을 만들거나 헬퍼 모듈을 적읍시다.
+
+```ts
+// src/utils.ts
+import * as path from 'path';
+import { ESLintUtils } from '@typescript-eslint/utils';
+
+export const createRule = ESLintUtils.RuleCreator((name) => {
+  const dirname = path.relative(__dirname, path.dirname(name));
+  const basename = path.basename(name, path.extname(name));
+  return `https://github.com/mkpoli/eslint-plugin-no-array-concat/blob/master/docs/${dirname}/${basename}.md`;
+});
+```
+
+```ts
+// src/index.ts
+module.exports = {
+  rules: {
+    'no-array-concat': require('./rules/no-array-concat'),
+  },
+};
+```
+
+### 테스트케이스 만들기
+
+https://typescript-eslint.io/docs/development/custom-rules/#testing-typed-rules
+
+타입검사기능을 사용할 때는 테스트를 할 때 `.tsconfig.json`가 필요하므로, 이를 위한 RuleTester를 준비합시다. 내용은 아무래도 좋지만 `file`, `estree.ts` 포함하지 않으면 에러가 나옵니다.
+
+```ts
+// tests/rule/no-array-concat.ts
+
+import rule from '../../src/rules/no-array-concat';
+import { TSESLint } from '@typescript-eslint/utils';
+
+export const ruleTester = new TSESLint.RuleTester({
+  parser: require.resolve('@typescript-eslint/parser'),
+  parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+    project: './tsconfig.test.json',
+  },
+});
+
+ruleTester.run('no-array-concat', rule, {
+  valid: [
+    {
+      code: '[...a, ...b]',
+      parserOptions: { ecmaVersion: 6 },
+    },
+    'Array.concat()',
+    {
+      code: 'foo.concat(bar)',
+    },
+    'new CustomClass().concat()',
+  ],
+
+  invalid: [
+    {
+      code: '[1, 2, 3].concat([4, 5, 6])',
+      errors: [{ messageId: 'noArrayConcat' }],
+    },
+    {
+      code: 'var foo = [1, 2, 3]; foo.concat([4, 5, 6])',
+      errors: [{ messageId: 'noArrayConcat' }],
+    },
+    {
+      code: 'var foo = new Array(3); foo.concat([4, 5, 6])',
+      errors: [{ messageId: 'noArrayConcat' }],
+    },
+    {
+      code: 'var foo = [0, 1, 2].map(x => x + 1); foo.concat([4, 5, 6])',
+      errors: [{ messageId: 'noArrayConcat' }],
+    },
+  ],
+});
+```
+
+### 규칙을 만들자
+
+이제는 규칙을 만들어봅시다.
+
+```ts
+// no-array-concat.ts
+import { AST_NODE_TYPES, TSESTree } from '@typescript-eslint/utils';
+import { ESLintUtils } from '@typescript-eslint/utils';
+
+import { getPropertyName } from 'eslint-ast-utils';
+import { createRule } from '../utils';
+
+export = createRule({
+  name: __filename,
+  meta: {
+    type: 'suggestion',
+    docs: {
+      description:
+        'Prevent using Array.prototype.concat() for Array concatenation',
+      recommended: false,
+    },
+    schema: [], // Add a schema if the rule has options
+    fixable: 'code',
+    messages: {
+      noArrayConcat: 'Do not use Array.prototype.concat(...)',
+    },
+  },
+  defaultOptions: [],
+  create(context) {
+    const parserServices = ESLintUtils.getParserServices(context);
+    const checker = parserServices?.program?.getTypeChecker() as any;
+
+    if (!checker || !parserServices) {
+      throw Error(
+        'Types not available, maybe you need set the parser to @typescript-eslint/parser'
+      );
+    }
+
+    function disallowedConcat(node: TSESTree.CallExpression) {
+      if (node.callee.type !== AST_NODE_TYPES.MemberExpression) {
+        return;
+      }
+
+      const callee = node.callee as TSESTree.MemberExpression;
+
+      const propertyName = getPropertyName(callee);
+      if (!propertyName || propertyName !== 'concat') {
+        return;
+      }
+
+      const tsNodeMap = parserServices.esTreeNodeToTSNodeMap.get(
+        node.callee.object
+      );
+      const type = checker!.getTypeAtLocation(tsNodeMap);
+      if (!checker.isArrayType(type)) {
+        return;
+      }
+
+      context.report({
+        messageId: 'noArrayConcat',
+        loc: callee.property.loc,
+        node,
+      });
+    }
+
+    return {
+      CallExpression: disallowedConcat,
+    };
+  },
+});
+```
+
+#### `create(context)` 함수
+
+파라메터 설정은 생략하겠습니다.
+`create` 함수는 검증 로직을 적는 곳입니다.
+
+```ts
+const parserServices = ESLintUtils.getParserServices(context);
+const checker = parserServices?.program?.getTypeChecker() as any;
+```
+
+가장 위에 것은 `@typescript-eslint/parser`의 마법으로 이걸 사용하면 TypeScript 내부의 타입검사기능을 얻을 수 있습니다. 이제부터는 타입체크 할 수 있습니다.
+
+그리고 `create` 반환값에 주목해주시면 `CallExpression:`은 AST 안에 모든 CallExpression, 모든 함수가 호출 된 트리 노드에 이 처리를 합니다.
+
+여기에 `disallowedConcat` 콜백 함수를 줍시다.
+이 함수에는 첫 번째 인수가 note인데 CallExpression 노드 인스턴스입니다.
+
+#### `callee` 판단
+
+CallExpression은 주로 callee, parameter 2가지로 인해 결정됩니다. parameter 설명은 딱히 필요없겠지만, callee를 설명하면 parameter 이외의 전부입니다. 한마디로 호출된 함수거나 사전 정보입니다.
+
+```ts
+if (node.callee.type !== AST_NODE_TYPES.MemberExpression) {
+  return;
+}
+
+const callee = node.callee as TSESTree.MemberExpression;
+```
+
+MemberExpression는 오브젝트 프로퍼티에 접속하는 녀석으로 `.`, `[]`으로 표현되는 관계입니다.
+`foo.bar`, `foo[bar]` 같이요
+
+제 목표가 `foo.concat(bar)`를 제어하는 것이므로 CallExpression `callee`가 MemberExpression `foo.concat`가 되지 않으면 됩니다. 그 외에는 에러를 뿜을 필요가 없으므로 그대로 리턴합니다.
+
+#### `callee.property` 판정
+
+MemberExpression도 같은 형식으로 `foo.bar`가 `object`인 `foo`와 `property`인 `bar`로 구성됩니다.
+이것을 자세히 보면
+
+```ts
+const propertyName = getPropertyName(callee);
+if (!propertyName || propertyName !== 'concat') {
+  return;
+}
+```
+
+`property` 명이 "concat"일 필요가 있으므로 `eslint-ast-util`에 있는 편리함 함수를 사용해 판정했습니다.
+
+#### `callee.object` 판정
+
+```js
+const tsNodeMap = parserServices.esTreeNodeToTSNodeMap.get(node.callee.object)
+const type = checker!.getTypeAtLocation(tsNodeMap)
+if (!checker.isArrayType(type)) {
+    return;
+}
+```
+
+`object`가 `Array`일 필요가 있습니다. 좋았던 것은 TypeScript 컴파일러 타입체커에는 `isArrayType` 메서드입니다.
+하지만 그걸 export하지 못하므로 직접 사용할 수 없습니다. 어떻게할까 생각하다가 예전에 만든 `global.d.ts`에 묻혀있던 `isArrayType`를 꺼내가지고 왔습니다.
+
+다음에는 `eslint-ast-utils`에도 타입이 정의되어 있지 않으므로 미리 붙여줍시다.
+
+```ts
+// global.d.ts
+declare module 'eslint-ast-utils' {
+  export function getPropertyName(
+    node: TSESTree.MemberExpression
+  ): string | undefined;
+}
+
+declare module 'typescript' {
+  interface TypeChecker {
+    // internal TS APIs
+
+    /**
+     * @returns `true` if the given type is an array type:
+     * - `Array<foo>`
+     * - `ReadonlyArray<foo>`
+     * - `foo[]`
+     * - `readonly foo[]`
+     */
+    isArrayType(type: Type): type is TypeReference;
+    /**
+     * @returns `true` if the given type is a tuple type:
+     * - `[foo]`
+     * - `readonly [foo]`
+     */
+    isTupleType(type: Type): type is TupleTypeReference;
+  }
+}
+```
+
+이제 에러없이 사용할 수 있습니다.
+
+#### ESLint에 알리기
+
+모든 예외 상황을 하나씩 제거한 후에, 담은 것은 진짜 `Array.prototype.concat`이 사용되는 상황 밖에 없습니다(만일 그것이 다르게 쓰여져도).
+
+```ts
+context.report({
+  messageId: 'noArrayConcat',
+  loc: callee.property.loc,
+  node,
+});
+```
+
+`context.report`로 알리면 정상적으로 에러가 나옵니다.
+
+#### 테스트하기
+
+정상적으로 작동하는게 테스트해보죠
+
+```bash
+pnpm run test
+```
+
+#### 빌드하고 완성
+
+```bash
+pnpm run build
+```
+
+## npm에 올리기
+
+```
+pnpm run release
+```
+
+끝
+
+## 결론
+
+여기까지 딱 10시간정도 걸렸습니다. 아직 미숙해서 엄청 조사하고 엄청 시도해보다보니 완성했습니다. 와~! 완성!
+
+이걸로 쾌적한 lint 생활을 시작할 수 있습니다. 여러분도 자주 착각할 수 있는 곳에 부디 자신만의 lint를 만들어보는건 어떨까요?
+
+## 역자후기
+
+배열에서 사용하는 concat를 대상으로 한 lint를 만들고 싶어서 타입을 확인할 수 있는 typescript를 사용했다 했는데, `Array.isArray`로 판정해서 배열이면 거기서 concat를 사용할 시 에러가 나오게끔 하면 안 되는 것인가 궁금하다...

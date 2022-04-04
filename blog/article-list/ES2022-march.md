@@ -1,0 +1,205 @@
+---
+slug: ES2022-march
+title: ES2022 3월 후보판을 보자
+authors: rewrite0w0
+tags: [javascript, ECMAScript, 감상]
+---
+
+# [ES2022 3월 후보판을 보자](https://github.com/tc39/ecma262/releases/tag/es2022-candidate-2022-03)
+
+> ~관심있는 ES2022 3월 후보판을 보자~
+
+## `.at()`
+
+```js
+const arr = ['하나', '둘', '삼'];
+arr.at(0); // 하나
+arr.at(-1); // 삼
+
+const str = '일이삼';
+str.at(0); // 일
+str.at(-1); // 삼
+```
+
+> 배열에서, 문자열, All Typed Array 똑같음
+> | at(숫자) | 출력 |
+> | -------- | --------- |
+> | 3~ | undefined |
+> | 2 | 삼 |
+> | 1 | 둘 |
+> | 0 | 하나 |
+> | -1 | 삼 |
+> | -2 | 둘 |
+> | -3 | 하나 |
+> | -4~ | undefined |
+
+> 어떻게 활용할 수 있을까?
+>
+> 생각하고 기입
+
+## top level `await`
+
+js 모듈이랑 사용가능
+
+```js
+// fetch request
+const colors = fetch('../data/colors.json').then((response) => response.json());
+
+export default await colors;
+```
+
+## error.cause
+
+```js
+function readFile(filePaths) {
+  return filePaths.map((filePath) => {
+    try {
+      //
+    } catch (err) {
+      //
+    }
+    throw new Error(`While processing ${filePath}`, { cause: error });
+  });
+}
+```
+
+다른 예시
+
+```js
+try {
+  try {
+    try {
+      throw new Error('Error1');
+    } catch (e) {
+      throw new Error('Error2', { cause: e });
+    }
+  } catch (e) {
+    throw new Error('Error3', { cause: e });
+  }
+} catch (e) {
+  console.table(e); // Error3
+  console.table(e.cause); // Error2
+  console.table(e.cause.cause); // Error1
+}
+```
+
+## 객체 indices
+
+이 코드가
+
+```js
+const matchObj = /(a+)(b+)/d.exec('aaaabb');
+
+console.log(matchObj);
+/*
+Output -
+['aaaabb', 'aaaa', 'bb', index: 0, input: 'aaaabb', groups: undefined, indices: Array(3)]
+*/
+```
+
+이렇게 된다
+
+```js
+matchObj.indices[1];
+/*
+Output - 
+[0, 4]
+*/
+```
+
+[프로포살 예시](https://github.com/tc39/proposal-regexp-match-indices)
+
+```js
+const re1 = /a+(?<Z>z)?/d;
+
+// indices are relative to start of the input string:
+const s1 = 'xaaaz';
+const m1 = re1.exec(s1);
+m1.indices[0][0] === 1;
+m1.indices[0][1] === 5;
+s1.slice(...m1.indices[0]) === 'aaaz';
+
+m1.indices[1][0] === 4;
+m1.indices[1][1] === 5;
+s1.slice(...m1.indices[1]) === 'z';
+
+m1.indices.groups['Z'][0] === 4;
+m1.indices.groups['Z'][1] === 5;
+s1.slice(...m1.indices.groups['Z']) === 'z';
+
+// capture groups that are not matched return `undefined`:
+const m2 = re1.exec('xaaay');
+m2.indices[1] === undefined;
+m2.indices.groups['Z'] === undefined;
+```
+
+## Object.hasOwn(obj, propKey)
+
+```js
+const object1 = {
+  prop: 'exists',
+};
+console.log(Object.hasOwn(object1, 'prop'));
+// expected output: true
+console.log(Object.hasOwn(object1, 'toString'));
+// expected output: false
+console.log(Object.hasOwn(object1, 'undeclaredPropertyValue'));
+// expected output: false
+```
+
+**프로퍼티가 있는가 없는가 확인**
+
+```js
+Object.hasOwn(instance, prop);
+```
+
+`prop`는 문자열이나 Symbol
+
+true / false 반환
+
+비슷한 `hasOwnProperty()`도 있지만 MDN 권장 `hasOwn()`
+
+```js
+let object = { foo: false };
+object.hasOwnProperty('foo');
+```
+
+얼핏 이렇게 쓰면 될 것 같은데, [프로토타입 오염](https://sosukesuzuki.dev/posts/stage-3-object-hasown/)때문에 위험함
+
+대신
+
+```js
+let object = { foo: false };
+Object.prototype.hasOwnProperty.call(object, 'foo');
+```
+
+괴상한 코드를 써야함
+
+이제는
+
+```js
+let object = { foo: false };
+Object.hasOwn(object, 'foo'); // true
+```
+
+## 나머지
+
+> 종교상의 이유로 기입하지 않습니다.
+
+## 맺음말
+
+여전히 업데이트 중인 es2022이니 추후 계속 갱신 가능
+
+## 출처
+
+- [MDN](https://developer.mozilla.org/)
+
+- [jser](https://jser.info/2022/03/29/es2022-safari-technology-preview-142-storybook/)
+
+- [JavaScript for impatient programmers](https://exploringjs.com/impatient-js)
+
+- [what's new in es2022](https://dev.to/jasmin/whats-new-in-es2022-1de6)
+
+- [node green](https://node.green/#ES2022)
+
+- [kangax](https://kangax.github.io/compat-table/es2016plus/)

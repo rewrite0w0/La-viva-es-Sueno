@@ -1,0 +1,225 @@
+---
+slug: react18-5min
+title: React 18 대비하려면 어떻게 해야할까? 5분만에 이해하기
+authors: rewrite0w0
+tags: [react, 번역]
+---
+
+# [React 18 대비하려면 어떻게 해야할까? 5분만에 이해하기](https://qiita.com/uhyo/items/bbc22022fe846fd2b763)
+
+React 18은 React 다음 메이저버전으로 2021년 6월 알파판, 11월에 베타판이 나왔습니다.
+
+또 Next.js 12에서도 React 18 서포트가 실험적 기능으로 추가되었습니다.
+
+React 18의 발소리가 점점 우리들에게 가까워지며, 얼리어댑터가 아닌 여러분에게도 드디어 눈에 들어오기 시작했을 것입니다.
+
+특히 React 18에는 [SSR 스트리밍 서포트](https://github.com/reactwg/react-18/discussions/37)가 추가되었습니다.
+
+현재 React로 SSR를 만들어 보고싶은 분은 그 원군으로 Next.js가 존재하기에, Next.js 12로 React 18를 통한 스트리밍의 은혜를 받을 수 있습니다.(Next.js는 [SSR Streaming이라 부릅니다.](https://nextjs.org/blog/next-12#server-side-streaming))
+
+또, 엄밀하게 말하면 React 18이랑은 다릅니다만, React Server Components도 Next.js 12에 [실험적 서포트가 제공되고 있습니다](https://nextjs.org/blog/next-12#react-server-components).
+
+SSR 스트리밍을 서포트하면서, 기존의 SSR의 좋은 점(특히 1RTT로 First Contentful Paint 도달하는 점)을 유지하면서, 스켈레톤 게시 등 지금까지 오직 클라이언트사이드에서 사용했던 퍼포먼스 최적화기술(특히 Largeset Contentful Paint 개선을 위한 기술)도 넣을 수 있습니다.
+
+이와 관련된 것으로 [더 빠른 WEB을 목표하는 Next.js](https://speakerdeck.com/takefumiyoshii/nextjs-make-the-web-faster)가 더 자세히 다루므로 봐주시길 바랍니다.
+
+이 글에는 이제는 외면할 수 없는 React 18를 어떻게 대비해야하는가에 정리합니다.
+
+한 마디로하면, 답은 **아무튼 Suspense를 이해하라** 입니다.
+
+Suspense 컨셉트만 이해하면, 스트리밍 SSR, React Server Components는 그 응용으로 이해하며, 이들의 기능을 잘 활용함으로 더욱 가까워집니다.
+
+## Suspense를 이해한다.
+
+이제부터 5분으로 Suspense를 이해합시다.
+
+또, 5분 밖에 안되므로 구체적으로 API를 하나하나 설명하지 않으며, 컨셉트만 설명합니다. 구체적인 사용을 알고 싶다면 공식 문서, 다른 글을 읽어주시길 바랍니다.
+
+그리고, 이해해야할 것은 단 하나입니다.
+
+Suspense에는 (더 정확히 말하면 React의 Concurrent Rendering 기능은), "컴포넌트 그 자체가 **로딩중이므로 아직 렌더링 하지 않는다** 상태가 될 때가 있습니다."
+
+가장 전형적인 로딩 예시로, API에서 데이터를 얻는 컴포넌트을 상정해봅시다.
+
+기존의 전형적 방법으로는 다음과 같이 컴포넌트를 적습니다.([React Query](https://react-query.tanstack.com/) 사용 예시)
+
+```tsx
+const TodoList: React.VFC = () => {
+  const { isLoading, error, data } = useQuery('todoData', loadTodoData);
+
+  if (isLoading) {
+    // 로딩중이므로 스켈레톤 표시
+
+    return <TodoListSkeleton />;
+  }
+
+  if (error) {
+    // 에러처리 (TODO)
+
+    return <p>gyaaaa</p>;
+  }
+
+  return <TodoListContents data={data} />;
+};
+```
+
+이렇게 기존의 방버븐 컴포넌트 (TodoList)가 데이터를 읽는 것을 담당하면서, 로딩인가 어떤가 정보를 그 컴포넌트가 기다리는 상태입니다.
+
+그래서 만약 로딩중이어도 **TodoList를 렌더링할 수 없다** 사태가 발생하지 않으며, 로딩중인 UI를 묘사하는 것은 TodoList의 책임이었습니다.
+
+그에 반해, Suspense를 사용하는 경우 TodoList 책임이 간략화됩니다.
+
+구체적으로는 로딩중인 처리(더불어 에러일 때 처리)는 TodoList 책임이 아니게 됩니다.
+
+Suspense를 사용하는 방법
+
+```tsx
+const TodoList: React.VFC = () => {
+  const { data } = useQuery('todoData', loadTodoData);
+
+  return <TodoListContents data={data} />;
+};
+```
+
+그럼 이 경우 로딩중은 어떻게 되는걸까요?
+
+답은, TodoList가 렌더링되지 않는다 알리며 렌더링을 파기합니다.
+
+TodoList를 사용하는 방법
+
+```tsx
+const App: React.VFC = () => {
+  return (
+    <PageLayout>
+      <TodoList />
+      {/* TodoList "렌더링 무리!!! 안 할래!!!!!"
+          App "!?" */}
+    </PageLayout>
+  );
+};
+```
+
+더 구체적으로는, React 런타임은 TodoList 렌더링을 하자했지만, TodoList는 데이터가 또 로딩중이므로 렌더링할 수 없다 말하며 렌더링을 중단합니다.
+
+(이것을 컴포넌트가 **서스펜드(보류)**한다 부릅니다)
+
+구체적인 장치로 useQuery가 내부에 [Promise를 throw한다](https://qiita.com/uhyo/items/255760315ca61544fe33)를 실행합니다.
+
+이에 따라, TodoList 렌더링이 무사히 성공하기 위해, 이미 읽는 것이 완료한 경우만 받아줍니다.
+
+이것이 TodoList의 책임이 적어지는 비결입니다.
+
+로딩을 핸들링하는 Suspense 컴포넌트
+
+이와 같이, **컴포넌트가 렌더링을 던진다**(Suspense 전에는 없었습니다)는 새로운 개념입니다.
+
+위의 예시로는 TodoList가 렌더링을 던지면 이를 사용하는 쪽 컴포넌트(App)도 렌더링을 할 수 없게됩니다. 어째듯 렌더링 결과가 없으니까요.
+
+> **렌더링을 던진다** 표현했습니다만, 실제로는 이 TodoList는 뒤에서 비동기통신을 준비해, 그것이 끝나면 로딩 상태가 아니게 된 자신으로 리트라이를 걸어주는 진중한 컴포넌트입니다. 일반적으로 서스펜드(보류)한다, 컴포넌트는 리트라이가 세트로 되어있습니다.
+
+이번에는 5분만에 이해하는 내용이므로 리트라이 관련해서는 생략합니다.
+
+그 덕에, **내부의 컴포넌트가 렌더링을 던져서 (서스펜드<보류>)했을 경우를 처리한다**
+
+이런 역할 컴포넌트가 React에서 제공됩니다.
+
+이것이야말로 Suspense입니다.
+
+이것은 fallback prop를 지정해서, 내부에서 서스펜드(보류)한 경우에 대체 표시를 지정할 수 있습니다.
+
+```tsx
+const App: React.VFC = () => {
+  return (
+    <PageLayout>
+      <Suspense fallback={<TodoListSkeleton />}>
+        <TodoList />
+
+        {/* TodoList "렌더링 무리!!! 안 할래!!!!!"
+            Suspense "ㅇㅇ" */}
+      </Suspense>
+    </PageLayout>
+  );
+};
+```
+
+이렇게 되므로, TodoList가 서스펜드(보류)를 한 경우에는 Suspense가 그것에 대처해주므로, App은 렌더링에 성공합니다.
+
+내부가 실패해도 외부에서의 영향을 억누르는, try-catch문에 가까운 것이라 볼 수 있습니다.
+
+> 에러처리에 대해서는 별도 Error Boundary를 준비함으로 대처할 수 있습니다.
+
+이 처럼, 비동기 로딩을 일어날 경우 컴포넌트로 인해서 기존 **로딩중 처리**와 **로딩 완료시 처리**로 정리되어 있습니다만, Suspense를 사용하면 이것을 분리할 수 있습니다. 기존의 if(isLoading) 같이 절차적 프로그램이었던 곳이 Suspense 컴포넌트라는 선언적인 방법이 되는 것도 주목해볼 필요가 있습니다.
+
+Suspense의 재미있는 점은, **여러 컴포넌트를 한 번에 관리할 수 있다** 입니다.
+
+다음과 같이 하면, 페이지에서 무엇인가 하나 서스펜드(보류)하면 전체가 스켈레톤이 되어버립니다. 여기서 3개의 컨텐츠가 App 안에 있습니다만, 그것을 하나의 Suspense로 감싸고 있습니다.
+
+```tsx
+const App: React.VFC = () => {
+  return (
+    <PageLayout>
+      <Suspense fallback={<PageSkeleton />}>
+        <MyProfile />
+
+        <TodoList />
+
+        <Comments />
+      </Suspense>
+    </PageLayout>
+  );
+};
+```
+
+한 편, 각각의 Suspense로 감사면, 각각 독립해서 스케레톤 표시를 가지며, 로딩완료하는 곳부터 게시됩니다.
+
+```tsx
+const App: React.VFC = () => {
+  return (
+    <PageLayout>
+      <Suspense fallback={<MyProfileSkeleton />}>
+        <MyProfile />
+      </Suspense>
+
+      <Suspense fallback={<TodoSkeleton />}>
+        <TodoList />
+      </Suspense>
+
+      <Suspense fallback={<CommentsSkeleton />}>
+        <Comments />
+      </Suspense>
+    </PageLayout>
+  );
+};
+```
+
+이렇게, Suspense 배치의 방법을 바꿈으로, 서스펜드(보류) 제어를 세세히 할 수 있습니다.
+
+Suspense와 React 18의 관계
+
+남은 시간이 적으므로 React 18로 이야기를 돌리겠습니다.
+
+React 18 SSR 스트리밍은 Suspense를 전제하고 있습니다.
+
+SSR 스트리밍은 **초기상태(로딩중 스켈레톤 같은 것이 보여있는 상태)**를 표현하는 HTML를 먼저 보내며, 그 다음으로 데이터가 준비되면 스켈레톤을 바꿔끼는 HTML 파편을 추가로 보낸다]는 방식입니다.
+
+이 처리 단위는 Suspense 단위입니다. 즉, 초기상태는 Suspense의 fallback이 게시되어진 상태이며, 그 부분이 로딩 완료된 경우는 Suspense 안을 통으로 바꿔끼는 HTML 파편을 보내는 것입니다.
+
+Suspense는 **비동기적 렌더링이 일단 멈추는 영역**을 정의한다는 의미가 있습니다.(실제로는 Suspense를 네스트하는 것도 조금 복잡합니다만)
+
+요를 말하면, "스트리밍 SSR를 활용하기 위해서는 비동기처리를 Suspense를 사용해 적을 필요가 있다"는 전제로, 이와 같이 SSR 스트리밍이 잘 되나를 제어하기 위해서는 Suspense를 적절한 위치에 둘 필요가 있습니다.
+
+세세히 Suspense를 둬서 돌리면, 그만큼 SSR 스트리밍도 세세하게 돌릴 수 있습니다.
+
+또, React Server Components도 **렌더링이 서버에(비동기적으로) 일어난다.** 특징에서 (클라이언트에서 보면) 필연적으로 "서스펜드(보류)의 가능성이 있습니다." 즉, Server Component도 Suspense로 감쌀 필요"가 있다는 것입니다.
+
+정리
+
+이 글에서는 React Suspense 개요를 설명해, React 18 혹은 React Server Components 기능을 잘 쓰기 위해서는 Suspense 이해가 필요하다는 것을 설명했습니다.
+
+5분보다 넉넉한 시간이 있어 Suspense를 충분히 이해하고 싶다면 [이글](https://zenn.dev/uhyo/books/react-concurrent-handson)을 읽어주세요
+
+## 읽을 거리
+
+https://velog.io/@jay/React-18-%EB%B3%80%EA%B2%BD%EC%A0%90
+
+https://ko.reactjs.org/blog/2021/06/08/the-plan-for-react-18.html

@@ -6,6 +6,21 @@
 
 /* You can override the default Infima variables here. */
 :root {
+  --kirin: #22a9c7;
+  --lemon: #f9e133;
+  --kirin-dark: #4dc5e0;
+  --kirin-darker: #24b7d8;
+  --kirin-darkest: #1d93ae;
+  --kirin-light: #77d3e7;
+  --kirin-lighter: #77d3e7;
+  --kirin-lightest: #caeef6;
+  --lemon-dark: #f9e134;
+  --lemon-darker: #f5d807;
+  --lemon-darkest: #c6ae05;
+  --lemon-light: #fae864;
+  --lemon-lighter: #fbef93;
+  --lemon-lightest: #fdf6c3;
+
   --ifm-color-primary: #2e8555;
   --ifm-color-primary-dark: #29784c;
   --ifm-color-primary-darker: #277148;
