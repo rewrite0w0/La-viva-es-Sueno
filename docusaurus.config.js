@@ -31,7 +31,7 @@ const config = {
           showReadingTime: true,
           // Please change this to your repo.
           editUrl: 'https://github.com/rewrite0w0/La-viva-es-Sueno',
-          blogSidebarTitle: 'All posts',
+          // blogSidebarTitle: 'All posts',
           blogSidebarCount: 'ALL',
         },
         theme: {
