@@ -11,9 +11,9 @@ tags: [javascript, 번역]
 
 > I have been writing Javascript since roughly 1997 but it still manages to occasionally do something that absolutely shocks me [pic.twitter.com/JyYOo4wGOu](https://pic.twitter.com/JyYOo4wGOu) — mcc (@mcclure111) [2022/01/11](https://twitter.com/mcclure111/status/1481027678362902528?ref_src=twsrc%5Etfw)
 
-JavaScript에서 `[1, 2, 3] + [4, 5, 6]`은 `"1,2,34,5,6"`이며, 직감에 반하기에 나온 반응이었다.
+JavaScript에서 `[1, 2, 3] + [4, 5, 6]`은 `"1,2,34,5,6"`이며, 직관에 반하기에 나온 반응이었다.
 
-필자도 직감적으로 반한다 느낀다.
+필자도 직관에 반한다 느낀다.
 
 하지만 이건 ECMAScript 사양을 착실히 수행한 것이다.
 

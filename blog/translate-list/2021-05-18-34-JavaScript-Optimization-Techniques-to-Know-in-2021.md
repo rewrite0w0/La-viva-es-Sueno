@@ -1,6 +1,6 @@
 ---
 slug: 34-JavaScript-Optimization-Techniques-to-Know-in-2021
-title: 34-JavaScript-Optimization-Techniques-to-Know-in-2021
+title: 34 JavaScript Optimization Techniques to Know in 2021
 authors: rewrite0w0
 tags: [javascript, Optimization, 번역]
 ---
