@@ -53,7 +53,7 @@ const config = {
         items: [
           { to: '/blog', label: 'Blog', position: 'left' },
           {
-            href: 'https://github.com/rewrite0w0/La-viva-es-Sueno',
+            href: 'https://github.com/rewrite0w0/',
             label: 'GitHub',
             position: 'right',
           },
