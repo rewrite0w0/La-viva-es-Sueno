@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkla_viva_es_sueno=self.webpackChunkla_viva_es_sueno||[]).push([[2285],{2840:function(a){a.exports=JSON.parse('{"allTagsPath":"/La-viva-es-Sueno/blog/tags","name":"fullstack","count":1,"permalink":"/La-viva-es-Sueno/blog/tags/fullstack"}')}}]);
