@@ -19,13 +19,18 @@ tags: [mindset, agile, 감상]
 
 ## 사전 지식
 
-### 만다라 계획표(만다라트)
+### 만다라 계획표
 
 만다라 계획표란 오타니 선수가 세운 계획표가 알려지면서 유명해졌다.
+
+<details>
+<summary>만다라 계획표 이미지</summary>
 
 ![otani mandara original](https://fukuoka-jibi.com/wp-content/uploads/2021/05/IMG_7074.jpg)
 
 ![otani mandara kr](http://img.sbs.co.kr/newimg/news/20170102/201010880_1280.jpg)
+
+</details>
 
 중앙에 큰 목표를 적고, 주변에는 중간 목표와 세부 목표를 적는 계획표이다.
 
