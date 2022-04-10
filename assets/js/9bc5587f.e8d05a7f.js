@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkla_viva_es_sueno=self.webpackChunkla_viva_es_sueno||[]).push([[1660],{8246:function(e){e.exports=JSON.parse('{"permalink":"/La-viva-es-Sueno/blog/tags/mindset","page":1,"postsPerPage":10,"totalPages":1,"totalCount":3,"blogDescription":"Blog","blogTitle":"Blog"}')}}]);
