@@ -522,3 +522,19 @@ test('wrong test', (): void => {
 ```
 
 9. `push`
+
+## 배포하기
+
+1. https://www.npmjs.com/ 접속해서 가입 & 로그인하기
+
+2. `package.json`의 `name`으로 배포되니 중복 확인
+
+```bash
+npm info jslib_trim
+```
+
+3. npm login
+
+4. npm publish
+
+5. [npmjs 확인](https://www.npmjs.com/package/jslib_trim)
