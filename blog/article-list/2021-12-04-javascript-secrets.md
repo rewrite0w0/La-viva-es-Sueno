@@ -1,8 +1,8 @@
 ---
 slug: javascript-secrets
-title: JS문서를 읽으며 느낀 비기들
+title: JS문서를 읽으며 느낀 비기
 authors: rewrite0w0
-tags: [javascript, beginner, secrets, 감상]
+tags: [javascript, 감상]
 ---
 
 ## image/iframes
@@ -306,7 +306,6 @@ console.log(cloneObj.nest === obj.nest); // => false
 function deepFreeze(obj) {
   if (typeof obj === 'object' && !Object.isFrozen(obj)) {
     Object.keys(obj).forEach((x) => deepFreeze(obj[x]));
-
     Object.freeze(obj);
   }
 
