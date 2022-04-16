@@ -33,7 +33,7 @@ tags: [코드구경, 감상]
 
 `index.js`가 시작점, 위와 같은 패키지를 의존하고 있다.
 
-[`consola`](https://www.npmjs.com/package/consola)이 초면인데, `Elegant Console Logger for Node.js and Browser` 이라 한다. 개발할 때 기분 좋게하는 용도로 이해하자.
+[`consola`](https://www.npmjs.com/package/consola)은 초면인데, `Elegant Console Logger for Node.js and Browser` 이라 한다. 개발할 때 기분 좋게하는 용도로 이해하자.
 
 ## index.js
 

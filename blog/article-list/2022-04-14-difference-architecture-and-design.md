@@ -1,5 +1,5 @@
 ---
-slug: difference-architecture-and-design.md
+slug: difference-architecture-and-design
 title: 아키텍처와 디자인
 authors: rewrite0w0
 tags: [architecture, design, 감상]
