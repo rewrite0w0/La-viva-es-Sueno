@@ -693,7 +693,7 @@ JS의 좋은 부분만 쓰면 좋은 프로그램을 만들 수 있다.
 - `create...`
 - `check...`
 
-## 모듈
+<!-- ## 모듈
 
 ### commonjs
 
@@ -803,7 +803,7 @@ someFunc() // move
 
 ```
 
-#### 여러 개 일 떄
+#### 여러 개 일 때
 
 ```js
 function someFunc() {
@@ -822,7 +822,7 @@ import { someFunc, someFuncSecond } from './modules.js';
 
 someFunc(); // move
 someFuncSecond(); // moveSecond
-```
+``` -->
 
 ## 배열로 할 수 있는 것
 
