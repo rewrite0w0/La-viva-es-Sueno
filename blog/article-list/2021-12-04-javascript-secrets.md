@@ -261,25 +261,93 @@ const obj = {
 
 JS는 기본 얕은 복사일 경우가 많다.
 
+### 얕은 복사1
+
 ```js
 // 얕은 복사
+const obj = {
+  level: 1,
+  nest: {
+    level: 2,
+  },
+};
+
+const shallowClone = obj;
+```
+
+### 얕은 복사2
+
+```js
+const obj = {
+  level: 1,
+  nest: {
+    level: 2,
+  },
+};
+
 const shallowClone = (obj) => {
   return Object.assign({}, obj);
 };
+
+const cloneObj = shallowClone(obj);
+
+obj.nest.hp = '100';
+console.log(obj.nest === cloneObj.nest); // true
 ```
 
+### 일반적인 깊은 복사
+
+#### ...
+
 ```js
+const obj = {
+  level: 1,
+  nest: {
+    level: 2,
+  },
+};
+
+const isDeepCloneObj = { ...obj };
+
+obj.nest.hp = '100';
+console.log(obj.nest === isDeepCloneObj.nest); // true
+```
+
+#### Object.assign
+
+```js
+const obj = {
+  level: 1,
+  nest: {
+    level: 2,
+  },
+};
+
+const shallowClone = (obj) => {
+  return Object.assign({}, obj);
+};
+
+const isDeepCloneObj = shallowClone(obj);
+obj.nest.hp = '100';
+console.log(obj.nest === isDeepCloneObj.nest); // true
+```
+
+### 진짜 깊은 복사
+
+#### 재귀
+
+```js
+const shallowClone = (obj) => {
+  return Object.assign({}, obj);
+};
 // obj 깊은 복사해서 오브젝트를 반환
 
 function deepClone(obj) {
   const newObj = shallowClone(obj);
 
   // 프로퍼티가 오브젝트이므로, 재귀적으로 복제
-
   Object.keys(newObj)
-
     .filter((k) => typeof newObj[k] === 'object')
-
     .forEach((k) => (newObj[k] = deepClone(newObj[k])));
 
   return newObj;
@@ -287,7 +355,6 @@ function deepClone(obj) {
 
 const obj = {
   level: 1,
-
   nest: {
     level: 2,
   },
@@ -296,8 +363,26 @@ const obj = {
 const cloneObj = deepClone(obj);
 
 // `nest` 오브젝트도 재귀적으로 복제된다.
+obj.nest.hp = '100';
+console.log(obj.nest === cloneObj.nest); // => false oh :)
+console.log(cloneObj.nest.hp); // => undefined oh :)
+```
 
-console.log(cloneObj.nest === obj.nest); // => false
+#### JSON
+
+```js
+const obj = {
+  level: 1,
+  nest: {
+    level: 2,
+  },
+};
+
+const isDeepCloneObj = JSON.parse(JSON.stringify(obj));
+
+obj.nest.hp = '100';
+console.log(obj.nest === isDeepCloneObj.nest); // => false oh! :)
+console.log(isDeepCloneObj.nest.hp); // undefined oh :)
 ```
 
 ## 깊은 동결
@@ -803,7 +888,7 @@ someFunc() // move
 
 ```
 
-#### 여러 개 일 때
+#### 여러개 일 때
 
 ```js
 function someFunc() {
@@ -861,6 +946,6 @@ arr.pop(); // [0, 1, 2, 3]
 | 꼬리 조사 | `obj[obj.length-1]` |
 | 선두 조사 | `obj[0]`            |
 
-## 대부분의 출처
+## 출처
 
 > [MDN](https://mdn.dev/), [jsprimer](https://jsprimer.net/), 자바스크립트는 왜 그모양일까?, [javascript.info](https://javascript.info/), [경험](https://github.com/rewrite0w0)
