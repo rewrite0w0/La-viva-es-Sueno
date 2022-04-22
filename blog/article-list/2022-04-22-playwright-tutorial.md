@@ -5,7 +5,7 @@ authors: rewrite0w0
 tags: [test, playwright, 감상]
 ---
 
-e2e 테스트 라이브러리가 여럿있지만, [Playwright](playwright.dev/)가 궁금해서 사용했다.
+e2e 테스트 라이브러리가 여럿있지만, [Playwright](https://playwright.dev/)가 궁금해서 사용했다.
 
 ## 시작
 
