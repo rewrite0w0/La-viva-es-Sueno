@@ -3,7 +3,7 @@ slug: 2022-04-23-record-of-github-action
 date: 2022-04-23T11:30
 title: github actions 사용기
 authors: rewrite0w0
-tags: [CD/CI, github, 감상]
+tags: [CI/CD, github, 감상]
 ---
 
 다음 프로젝트에 대한 생각하다
@@ -105,6 +105,15 @@ module.exports = nextConfig;
 ### 특이사항
 
 다른 글을 보면 자동으로 생기는 것 같은데 필자는 그게 안 되서 일단 수동으로 `git checkout -b gh-pages`해서 `gh-pages` 브런치를 생성했다.
+
+:::note
+**추가**
+
+글로 쓴 코드를 기반으로 새 프로젝트, 새 레포지토리로 push하니 자동으로 `gh-pages`가 만들어졌다.
+아마 진행과정에서 무엇인가 내가 순서를 잘 못 뒀거나 빼먹은 모양
+
+[git](https://github.com/rewrite0w0/yumemi-test-frontend/tree/2adf4ee49484db5a394ecf8036c80d43db374822)
+:::
 
 ## 결론
 
