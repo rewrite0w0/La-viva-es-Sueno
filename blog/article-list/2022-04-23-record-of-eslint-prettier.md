@@ -109,8 +109,8 @@ node_modules
 // ..
 "scripts:"
     // ..
-   "lint": "next lint --fix",
-    "format": "prettier --write ."
+  "lint": "next lint --fix",
+  "format": "prettier --write ."
 // ..
 ```
 
