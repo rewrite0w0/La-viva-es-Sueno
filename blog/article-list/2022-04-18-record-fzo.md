@@ -1,5 +1,5 @@
 ---
-slug: record-fzo
+slug: record-of-fzo
 title: fzo 제작기
 authors: rewrite0w0
 tags: [nodejs, javascript, 감상]
