@@ -6,7 +6,7 @@ authors: rewrite0w0
 tags: [eslint, prettier, 감상]
 ---
 
-[글](2022-04-23-record-of-github-action)에 이어 쓰는 eslint/prettier
+[글](/blog/2022-04-23-record-of-github-action)에 이어 쓰는 eslint/prettier
 
 ## 동기
 
@@ -72,7 +72,7 @@ node_modules
 
 여담으로 vsc 사용할 때도 적는다.
 
-[vsc 세팅](setting-vsc-and-git)
+[vsc 세팅](/blog/setting-vsc-and-git)
 
 `.vscode/settings.json`
 
