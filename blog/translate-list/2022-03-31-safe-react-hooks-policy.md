@@ -187,7 +187,7 @@ API request, response 객체가 그대로 1개의 `state`에
 
 결과, **버그 발생 지점 특정**이 쉬워진다.
 
-**좋은 예: 로드 함수**
+**좋은 예: 원형 `state` 갱신**
 
 ```tsx
 const [name, setName] = useState<string>('');
