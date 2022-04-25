@@ -107,7 +107,7 @@ hook은 `into hook(연동)`을 의미
   1. 깊은 트리 중첩이 없음
 
 - 컴포넌트 재사용 어려움
-- 관계없는 컴포넌트들이 한데모임
+- 관계없는 컴포넌트가 한데 모임
 
 ---
 
@@ -310,6 +310,12 @@ useInsertionEffect(didUpdate);
 시그니처는 useEffect와 같으며, 모든 DOM 변이 전에 동기적으로 동작합니다.
 useLayoutEffect로 레이아웃을 읽기 전에, DOM에 스타일을 주입하기 위해 이것을 사용합니다.
 hook은 스코프가 한정되어 있기에, hook은 refs에 접근하지 못하며, 갱신을 스케쥴하는 것도 안 됩니다.
+
+:::caution
+`useInsertionEffect`는 css-in-js 라이브러리 제작자만 사용해야 합니다.
+
+useEffect/useLayoutEffect를 사용해주세요.
+:::
 
 ## 볼 거리
 
