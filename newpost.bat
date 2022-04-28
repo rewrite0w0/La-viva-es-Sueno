@@ -10,7 +10,7 @@ if /I "%Input%"=="t" (
   @REM echo >"%DATE%"-"%Title%".md
   echo %DATE%-%Title%>./blog/translate-list/"%DATE%"-"%Title%".md
 ) else if /I "%Input%"=="a" (
-  powershell.exe ni ./blog/article-list/"%DATE%"-"%Title%".md
+  echo %DATE%-%Title%>./blog/article-list/"%DATE%"-"%Title%".md
 ) else (
   echo incorrect input
   EXIT /b
