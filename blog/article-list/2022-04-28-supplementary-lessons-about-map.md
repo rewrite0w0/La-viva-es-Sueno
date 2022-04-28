@@ -70,7 +70,7 @@ arr.forEach((x) => alert(x));
 arr.map((x) => alert(x)); // [undefined, undefined, undefined, undefined, undefined]
 ```
 
-위와 같은 예시 같은 상황같이(DOM조작으로 클래스 추가) 같이 수정을 가해도 되거나, 새 배열이 필요없을 경우에 사용하자.
+위와 같은 예시 같은 상황같이 (DOM조작으로 클래스 추가 / 목록에 어떤 행위를 실행) 같이 수정을 가해도 되거나, 새 배열이 필요없을 경우에 사용하자.
 
 ```js
 // forEach
