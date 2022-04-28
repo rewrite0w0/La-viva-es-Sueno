@@ -5,7 +5,7 @@ authors: rewrite0w0
 tags: [javascript, 감상]
 ---
 
-이전에 번역한 [글](stop-abusing-map)의 보충이다.
+이전에 번역한 [글](/blog/stop-abusing-map)의 보충이다.
 
 먼저 글을 상기해보면 `map`은 [새 배열을 반환하는 메서드](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/map)이다.
 
@@ -161,10 +161,41 @@ await Promise.all(dogs.map(async (dog) => await dog.eat('Pedigree')));
 
 ## 읽을거리
 
-- [.map() 남용을 멈추자](stop-abusing-map)
+- [.map() 남용을 멈추자](/blog/stop-abusing-map)
 - https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/
 - https://qiita.com/diescake/items/70d9b0cbd4e3d5cc6fce
 - https://betterprogramming.pub/which-is-the-fastest-while-for-foreach-for-of-9022902be15e
 - https://stackoverflow.com/questions/38362231/how-to-use-promise-in-foreach-loop-of-array-to-populate-an-object
 - https://stackoverflow.com/questions/37576685/using-async-await-with-a-foreach-loop
 - https://azu.github.io/promises-book/
+- https://tc39.es/ecma262/multipage/indexed-collections.html#sec-array.prototype.map
+- https://tc39.es/ecma262/multipage/indexed-collections.html#sec-array.prototype.foreach
+
+Let O be ? ToObject(this value). 2. Let len be ? LengthOfArrayLike(O). 3. If IsCallable(callbackfn) is false, throw a TypeError exception. 4. Let A be ? ArraySpeciesCreate(O, len). 5. Let k be 0. 6. Repeat, while k < len,
+
+    a. Let Pk be ! ToString(𝔽(k)).
+    b. Let kPresent be ? HasProperty(O, Pk).
+    c. If kPresent is true, then
+        i. Let kValue be ? Get(O, Pk).
+        ii. Let mappedValue be ? Call(callbackfn, thisArg, « kValue, 𝔽(k), O »).
+        iii. Perform ? CreateDataPropertyOrThrow(A, Pk, mappedValue).
+    d. Set k to k + 1.
+
+7. Return A.
+
+//
+
+When the forEach method is called, the following steps are taken:
+
+    1. Let O be ? ToObject(this value).
+    2. Let len be ? LengthOfArrayLike(O).
+    3. If IsCallable(callbackfn) is false, throw a TypeError exception.
+    4. Let k be 0.
+    5. Repeat, while k < len,
+        a. Let Pk be ! ToString(𝔽(k)).
+        b. Let kPresent be ? HasProperty(O, Pk).
+        c. If kPresent is true, then
+            i. Let kValue be ? Get(O, Pk).
+            ii. Perform ? Call(callbackfn, thisArg, « kValue, 𝔽(k), O »).
+        d. Set k to k + 1.
+    6. Return undefined.
