@@ -143,6 +143,44 @@ await Promise.all(dogs.map(async (dog) => await dog.eat('Pedigree')));
 
 둘이 비슷해 보인다해서 비교하면 안된다.
 
+ECMAScript 사양서를 구경해보자
+
+### map
+
+1. Let O be ? ToObject(this value).
+2. Let len be ? LengthOfArrayLike(O).
+3. If IsCallable(callbackfn) is false, throw a TypeError exception.
+4. Let A be ? ArraySpeciesCreate(O, len).
+5. Let k be 0.
+6. Repeat, while k < len,
+   a. Let Pk be ! ToString(𝔽(k)).
+   b. Let kPresent be ? HasProperty(O, Pk).
+   c. If kPresent is true, then
+   i. Let kValue be ? Get(O, Pk).
+   ii. Let mappedValue be ? Call(callbackfn, thisArg, « kValue, 𝔽(k), O »).
+   iii. Perform ? CreateDataPropertyOrThrow(A, Pk, mappedValue).
+   d. Set k to k + 1.
+7. Return A.
+
+//
+
+### forEach
+
+1. Let O be ? ToObject(this value).
+2. Let len be ? LengthOfArrayLike(O).
+3. If IsCallable(callbackfn) is false, throw a TypeError exception.
+4. Let k be 0.
+5. Repeat, while k < len,
+   a. Let Pk be ! ToString(𝔽(k)).
+   b. Let kPresent be ? HasProperty(O, Pk).
+   c. If kPresent is true, then
+   i. Let kValue be ? Get(O, Pk).
+   ii. Perform ? Call(callbackfn, thisArg, « kValue, 𝔽(k), O »).
+   d. Set k to k + 1.
+6. Return undefined.
+
+```
+
 ## 재결론
 
 `map`을 남용하지 말자는 말 그대로 `map`을 남용하지 말자이다.
@@ -170,3 +208,4 @@ await Promise.all(dogs.map(async (dog) => await dog.eat('Pedigree')));
 - https://azu.github.io/promises-book/
 - https://tc39.es/ecma262/multipage/indexed-collections.html#sec-array.prototype.map
 - https://tc39.es/ecma262/multipage/indexed-collections.html#sec-array.prototype.foreach
+```
