@@ -115,13 +115,13 @@ await Promise.all(dogs.map(async (dog) => await dog.eat('Pedigree')));
 
 [또한 `fetch`나 `alert` 같이 비동기처리를 할 때 `forEach`로하면 루프마다 `await`할 수 있으므로 이를 사용하면 된다.](https://stackoverflow.com/questions/37576685/using-async-await-with-a-foreach-loop)
 
-[하지만 이 또한 실제로는 `Promise.all` 이용해서 병렬처리하는 경우가 많으므로 이 때도 `map`을 쓰면 된다.](https://qiita.com/diescake/items/70d9b0cbd4e3d5cc6fce)
+[하지만 이 또한 실제로는 `Promise.all` 이용해서 병렬처리하는 경우가 많으므로 이 때도 `map`을 쓰면 된다.](https://qiita.com/diescake/items/70d9b0cbd4e3d5cc6fce#foreach-%E3%81%8C%E5%A6%A5%E5%BD%93%E3%81%AA%E3%82%B1%E3%83%BC%E3%82%B9)
 
 ## 결론
 
 상황에 따라 `map`과 `forEach`를 구분해야 써야 하며, 기준은 새 배열이 필요한 작업인가 아닌가로 판단해야 한다.
 
-## forEach 자체도 문제가 있다.
+## 여담1: forEach 자체도 문제가 있다.
 
 [![which is the fastest](https://miro.medium.com/max/1400/1*rc30xdezgXIw-YtoccCXPQ.png)](https://betterprogramming.pub/which-is-the-fastest-while-for-foreach-for-of-9022902be15e)
 
@@ -129,57 +129,117 @@ await Promise.all(dogs.map(async (dog) => await dog.eat('Pedigree')));
 
 큰 작업을 할 때는 `while`를 쓰거나 `for...of`를 하는 것이 나을 것이다.
 
-> 되도록 `for`는 피하고 싶으므로
+> 되도록 `for`는 피하고 싶으므로...
 
-## `map`과 `forEach`는 비교 대상이 아니다.
+## 여담2: `map`과 `forEach`는 비교 대상이 아니다.
 
 애초에 `forEach`는 `map`이랑 비교하면 안된다.
 
 비교는 둘이 같은 조건일 때하는 것인데, 둘은 그렇지 않다. 역할이 전혀 다르다.
 
-`forEach`는 `반환 값`을 무시한다.
+`forEach`는 `반환 값을 무시`한다.
 
-`map`는 `반환 값`을 처리한다. 새 배열을 만든다.
+`map`는 `반환 값을 처리`한다. `새 배열을 만든다`.
 
 둘이 비슷해 보인다해서 비교하면 안된다.
 
-ECMAScript 사양서를 구경해보자
+ECMAScript 사양서를 같이 구경해보자
+
+공통점은 _이렇게_, 차이점은 **이렇게** 표식을 붙였다
 
 ### map
 
-1. Let O be ? ToObject(this value).
-2. Let len be ? LengthOfArrayLike(O).
-3. If IsCallable(callbackfn) is false, throw a TypeError exception.
-4. Let A be ? ArraySpeciesCreate(O, len).
-5. Let k be 0.
-6. Repeat, while k < len,
-   a. Let Pk be ! ToString(𝔽(k)).
-   b. Let kPresent be ? HasProperty(O, Pk).
-   c. If kPresent is true, then
-   i. Let kValue be ? Get(O, Pk).
-   ii. Let mappedValue be ? Call(callbackfn, thisArg, « kValue, 𝔽(k), O »).
-   iii. Perform ? CreateDataPropertyOrThrow(A, Pk, mappedValue).
-   d. Set k to k + 1.
-7. Return A.
+1. _Let O be ? ToObject(this value)._
+2. _Let len be ? LengthOfArrayLike(O)._
+3. _If IsCallable(callbackfn) is false, throw a TypeError exception._
+4. _Let A be ? ArraySpeciesCreate(O, len)._
+5. _Let k be 0._
+6. _Repeat, while k < len,_
 
-//
+   a. _Let Pk be ! ToString(𝔽(k))._
+
+   > `Pk => property key`
+
+   b. _Let kPresent be ? HasProperty(O, Pk)._
+
+   c. _If kPresent is true, then_
+
+   1. _Let kValue be ? Get(O, Pk)._
+   2. **Let mappedValue be ? Call(callbackfn, thisArg, « kValue, 𝔽(k), O »).**
+   3. **Perform ? CreateDataPropertyOrThrow(A, Pk, mappedValue).**
+
+   d. _Set k to k + 1._
+
+7. **Return A.**
 
 ### forEach
 
-1. Let O be ? ToObject(this value).
-2. Let len be ? LengthOfArrayLike(O).
-3. If IsCallable(callbackfn) is false, throw a TypeError exception.
-4. Let k be 0.
-5. Repeat, while k < len,
-   a. Let Pk be ! ToString(𝔽(k)).
-   b. Let kPresent be ? HasProperty(O, Pk).
-   c. If kPresent is true, then
-   i. Let kValue be ? Get(O, Pk).
-   ii. Perform ? Call(callbackfn, thisArg, « kValue, 𝔽(k), O »).
-   d. Set k to k + 1.
-6. Return undefined.
+1. _Let O be ? ToObject(this value)._
+2. _Let len be ? LengthOfArrayLike(O)._
+3. _If IsCallable(callbackfn) is false, throw a TypeError exception._
 
-```
+> Let A be ? ArraySpeciesCreate(O, len). 가 없다
+
+4. _Let k be 0._
+5. _Repeat, while k < len,_
+
+   a. _Let Pk be ! ToString(𝔽(k))._
+
+   b. _Let kPresent be ? HasProperty(O, Pk)._
+
+   c. _If kPresent is true, then_
+
+   1. _Let kValue be ? Get(O, Pk)._
+   2. **Perform ? Call(callbackfn, thisArg, « kValue, 𝔽(k), O »).**
+
+   d. _Set k to k + 1._
+
+6. **Return undefined.**
+
+### filter
+
+거의 비슷한 부분이 있다 느낄 수 있지만 그것은 `Array.prototype`에서 일반적으로 공유하는 부분이 있다는 것을 알 수 있다. `map`, `forEach` 같이 `callbackfn, thisArg`를 받는 `filter`를 같이 보면 명백하다.
+
+1. _Let O be ? ToObject(this value)._
+
+2. _Let len be ? LengthOfArrayLike(O)._
+
+3. _If IsCallable(callbackfn) is false, throw a TypeError exception._
+
+4. _Let A be ? ArraySpeciesCreate(O, 0)._
+
+5. _Let k be 0._
+
+6. **Let `to` be 0.**
+
+7. _Repeat, while k < len,_
+
+   a. _Let Pk be ! ToString(𝔽(k))._
+
+   b. _Let kPresent be ? HasProperty(O, Pk)._
+
+   c. _If kPresent is true, then_
+
+   1. _Let kValue be ? Get(O, Pk)._
+
+   > 이하부터 `map` / `filter` 기능 차이 발생
+
+   2. **Let selected be ToBoolean(? Call(callbackfn, thisArg, « kValue, 𝔽(k), O »)).**
+
+   3. _If selected is true, then_
+
+      > `map`에 비해 과정 하나가 없다
+
+      1. _Perform ? CreateDataPropertyOrThrow(A, ! ToString(𝔽(to)), kValue)._
+      2. **Set `to` to `to` + 1.**
+
+   d. **Set k to k + 1.**
+
+8. **Return A.**
+
+:::note
+비슷한 부분은 `map`, `forEach`, `reduce`, `filter`, `every`, `some` 등 Array 메서드가 공유하는 부분일 뿐이다. 비슷해 보이는 것은 작동 방식일 뿐 모두 다른 `역할`이 있다. 그러므로 다른 것이므로 비교할 수 없다.
+:::
 
 ## 재결론
 
@@ -194,8 +254,10 @@ ECMAScript 사양서를 구경해보자
 1. 새 배열이 필요한가? => `map`이어야 하는가? 다른 메서드로 할 수 없는가?
 
 2. 새 배열이 필요없는가? =>
-   1. 혹시 다른 메서드(`filter`, `every`...)로 할 수 없는가?
-   2. `while` / `for` / `forEach` / `for...of`
+   1. 혹시 다른 메서드(`filter`, `filter`, `every`...)로 할 수 없는가?
+   2. `while` / `for...of` 사용
+
+**알맞는 역할에 맞는 메서드를 사용하자는 결론이다**
 
 ## 읽을거리
 
@@ -208,4 +270,3 @@ ECMAScript 사양서를 구경해보자
 - https://azu.github.io/promises-book/
 - https://tc39.es/ecma262/multipage/indexed-collections.html#sec-array.prototype.map
 - https://tc39.es/ecma262/multipage/indexed-collections.html#sec-array.prototype.foreach
-```
