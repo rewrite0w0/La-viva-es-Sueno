@@ -9,7 +9,9 @@ tags: [javascript, ECMAScript, 번역]
 
 ## JavaScript 진화에 변화할 코딩 습관
 
-2022-03-25 UIT Meetup vol.15 『Relearn Modern Web Standard』[uhyo](https://twitter.com/uhyo_)
+2022-03-25 UIT Meetup vol.15 『Relearn Modern Web Standard』
+
+[uhyo](https://twitter.com/uhyo_)
 
 ## About Speaker
 
@@ -61,9 +63,7 @@ const diff = aprilFool.since(today)  diff.toString() // "P7D"  diff.toLocaleStri
 
 ### Temporal 객체
 
-![temporal example](/img/temporal_example.jpg)
-
-> [Temporal documentation](https://tc39.es/proposal-temporal/docs/) 에서 인용
+[![Temporal documentation](https://tc39.es/proposal-temporal/docs/persistence-model.svg)](https://tc39.es/proposal-temporal/docs/)
 
 ### 당장 사용 가능한 Polyfil
 
