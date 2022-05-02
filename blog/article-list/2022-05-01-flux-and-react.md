@@ -1,15 +1,11 @@
 ---
 slug: 2022-05-01-flux-and-react
-title: flux와 가상돔에 대해서
+title: flux와 가상 DOM에 대해서
 authors: rewrite0w0
 tags: [architecture, react, 감상]
 ---
 
-React를 보고 있으면 **Flux**라는 친구를 만난다. 그래서 이에 대해 조사해보기로 했다.
-
-<!-- ## TL;DR
-
-React는 가상 DOM을 사용하며, 이를 위한 방법으로 Flux 패턴을 취하고 있다. -->
+React 다루다보면 **Flux**를 만난다. 그래서 이에 대해 조사해보기로 했다.
 
 ## 가상 DOM
 
@@ -50,6 +46,8 @@ div.textContent = 'test';
 
 데이터 흐름을 처리하는 방법이다.
 
+또한 Facebook이 클라이언트 사이드의 Web 애플리케이션을 구축하기 위해 사용하고 있는 애플리케이션 아키텍처이다.
+
 단방향 모델이며, `MVC`는 금방 복잡화되기 때문에 facebook(현 Meta)는 [`MVC` 패턴을 버리고 Flux 패턴을 선택했다.](http://www.infoq.com/news/2014/05/facebook-mvc-flux)
 
 왜 그렇게 했는가 [영상](https://www.youtube.com/watch?list=PLb0IAmt7-GS188xDYE-u1ShQmFFGbrk0v&time_continue=621&v=nYkdrAPrdcw)에서는 이렇게 설명한다. (물론 facebook인 MVC를 오독을 했다는 의견도 있다.)
@@ -59,6 +57,7 @@ div.textContent = 'test';
 ![MVC](<https://imgopt.infoq.com/fit-in/1200x2400/filters:quality(80)/filters:no_upscale()/news/2014/05/facebook-mvc-flux/ja/resources/flux-react-mvc.png>)
 
 > 이렇게되면 모델관련 뷰가 대량으로 추가되어 복잡화가 폭발했다.
+>
 > 이러한 애플리케이션은 모델과 뷰 사이의 쌍방향 데이터 흐름이 만들어질 가능성이 있으므로, 이해하거나 디버그가 어려워진다. 그렇기에 Flux에 의한 설계를 대안으로 선택했다.
 
 ![Flux Basic](https://camo.qiitausercontent.com/dfc8fb3817c3f59861ced5659268a27226d01218/68747470733a2f2f71696974612d696d6167652d73746f72652e73332e616d617a6f6e6177732e636f6d2f302f3133343239342f66356133396564642d323462392d656362622d323837332d3330646265623933316533382e706e67)
@@ -101,7 +100,7 @@ div.textContent = 'test';
 >
 > **여러 객체 상태를 관리해서, 하나의 객체 인스턴스가 아닌 것이 차이이다.**
 >
-> 또한 Bacnbone 프레임워크 콜랙션과 같지는 않다.
+> 또한 Backbone 프레임워크 콜랙션과 같지는 않다.
 >
 > ORM 형식 객체 집합을 관리하는 것보다 단순하며,
 >
@@ -113,7 +112,46 @@ div.textContent = 'test';
 
 > 여담으로 `observer` 패턴이다.
 
-## 중간정리
+:::note
+**dispatcher?** : 사전적 의미 _발송자_
+
+dispatcher는 스토어 사이 의존관계를 관리하는 것.
+
+Flux에서는 View / Model의 증가 대신에 Action과 Store가 증가한다.
+
+그러기에 모든 데이터 처리가 dispatcher에 집약된다.
+
+등록된 콜백함수에 페이로드를 브로드캐스트하기 위함.
+
+[dispatcher.js](https://github.com/facebook/flux/blob/main/src/Dispatcher.js)
+
+dispatcher는 action을 받아, dispatcher에 등록된 action를 dispatch한다.
+
+**모든 store는 모든 action를 받는다.**
+
+각 애플리케이션에는 싱글톤 dispatcher가 하나만 존재한다.
+
+예시:
+
+1. 유저가 todo를 입력하고 Enter를 입력
+2. view는 이 이벤트를 포착해서, todo 입력을 포함하는 `add-todo` action를 dispatch한다.
+3. 모든 store가 이 action을 받는다.
+
+그래서 **Action에 의한 Store 변경**이라는 점이 명백하기 때문에, Action 이후 애플리케이션 상태가 예측가능해진다.
+
+[![flux image](https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F134294%2F460f6ff3-fd48-989a-3f30-a52c0b8cdc99.png?ixlib=rb-4.0.0&auto=format&gif-q=60&q=75&w=1400&fit=max&s=141271f511a0df153babb796458bebe5)
+](https://qiita.com/knhr__/items/5fec7571dab80e2dcd92)
+
+Store가 증가하고, Store는 다른 스토어 갱신이 끝날 때까지 View에 전달하지 않는다. 또한 Store는 다른 Store에 계층구조적으로 의존한다.
+
+그래서 Store는 다른 Store의 의존에 신경쓰지 않은 상태로 순수하게 데이터 갱신만 생각하면 된다.
+
+또한 애플리케이션 전체 관점으로도 데이터를 다룰 때는 Store만 갱신하면 된다. Store 갱신은 부작용이 없도록 데이터를 갱신을 하므로, 같은 데이터인데 어느쪽은 오래되었고, 어느 쪽은 새로운 상황 같은 것이 사라진다.
+
+새로운 View, Action 등 코드를 작성해야하지만 복잡하고 예측 불가능한 상황이 일어나기 어려워지므로 충분히 이득이 상황이다.
+:::
+
+## 정리
 
 ### MVC
 
@@ -127,6 +165,10 @@ Views ---> (actions) ----> Dispatcher ---> (registered callback) ---> Stores ---
 |                                                                                   V
 +-- (Controller-Views "change" event handlers) ---- (Stores emit "change" events) --+
 ```
+
+그러나 Flux와 MVC는 완전히 다른 개념이 아니라, 지금까지 개념의 연장선이다.
+
+단지 복잡화되기 쉬운 부분을 명확히 했을 분이다.
 
 ## React와 Flux와 가상 DOM
 
@@ -158,7 +200,7 @@ Redux는 Flux의 파생이다.
 
 하지만 차이가 있다.
 
-Redux에는 3원칙이 있으며, `Dispatcher`는 없다.
+Redux에는 3원칙이 있으며, [`Dispatcher`는 없다.](https://redux.js.org/understanding/history-and-design/prior-art#flux=)
 
 > [3원칙:](https://redux.js.org/understanding/thinking-in-redux/three-principles)
 >
@@ -176,8 +218,6 @@ Redux에는 3원칙이 있으며, `Dispatcher`는 없다.
 
 ![Redux](https://camo.qiitausercontent.com/50fac8c3a36d87cefc34e41382dd9feebf5e7fe4/68747470733a2f2f71696974612d696d6167652d73746f72652e73332e616d617a6f6e6177732e636f6d2f302f33393338322f38356530393432392d643966362d303738392d386434332d6364613637643166323037652e6a706567)
 
-<!-- ## 결론 -->
-
 ## 읽을거리
 
 - https://facebook.github.io/flux/
@@ -190,6 +230,9 @@ Redux에는 3원칙이 있으며, `Dispatcher`는 없다.
 - https://developer.mozilla.org/
 - https://qiita.com/kouh/items/dfc14d25ccb4e50afe89
 - https://saneyukis.hatenablog.com/entry/2014/09/26/174750
+- https://qiita.com/Ted-HM/items/7dde25dcffae4cdc7923
+- https://kotobank.jp/word/%E3%83%87%E3%82%A3%E3%82%B9%E3%83%91%E3%83%83%E3%83%81-6089
+- https://e-words.jp/w/%E3%83%87%E3%82%A3%E3%82%B9%E3%83%91%E3%83%83%E3%83%81%E3%83%A3.html
 - https://qiita.com/knhr__/items/5fec7571dab80e2dcd92
 - https://hogehuga.com/post-1095/
 - https://www.freecodecamp.org/news/an-introduction-to-the-flux-architectural-pattern-674ea74775c9/
@@ -197,3 +240,6 @@ Redux에는 3원칙이 있으며, `Dispatcher`는 없다.
 - https://programmingwithmosh.com/react/react-virtual-dom-explained/
 - https://qiita.com/syossan27/items/7e1b2e07ac68b96bdaa7
 - https://blog.logrocket.com/jotai-vs-recoil-what-are-the-differences/
+- https://stackoverflow.com/questions/32461229/why-use-redux-over-facebook-flux
+- https://reactjs.org/blog/2014/07/30/flux-actions-and-the-dispatcher.html
+- https://github.com/facebook/flux/tree/db8e97d6ee972f7012edbfd34f2dc6f6e3b85843/examples/flux-concepts
