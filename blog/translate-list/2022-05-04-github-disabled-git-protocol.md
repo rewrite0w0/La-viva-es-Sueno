@@ -27,7 +27,7 @@ Error: Failure while executing; `git clone https://github.com/wez/homebrew-wezte
 
 [지정된 글](https://github.blog/2021-09-01-improving-git-protocol-security-github/)을 읽으면 `git://`으로 시작하는 URL에서 접근 === git 프로토콜로 접근이 무효화된 듯합니다.
 
-[자신의 <코드>.gitconfig</ 코드>를 보면](https://github.com/nasa9084/dotfiles/blob/2aa844041a6ec45ae08d73ba850ecedb68e0eb89/.gitconfig), https://github.com/ 대신 git:github.com를 사용하는 설정이었습니다.
+[자신의 .gitconfig를 보면](https://github.com/nasa9084/dotfiles/blob/2aa844041a6ec45ae08d73ba850ecedb68e0eb89/.gitconfig), [https://github.com](https://github.com) 대신 git:github.com를 사용하는 설정이었습니다.
 
 ```git
 [url "git@github.com:"]
@@ -38,7 +38,7 @@ Error: Failure while executing; `git clone https://github.com/wez/homebrew-wezte
 	insteadOf = https://github.com/
 ```
 
-Github에 의하면 계속 git 프로토콜 접속은 읽기 전용이었던 것 같습니다만, 명확히 pushInsteadOf에서 [git@github.com](git@github.com)를 사용하는 설정까지 적혀있으므로, 지금까지 문제없이 사용할 수 있었던 것 같습니다. 저 자신도 왜 이런 설정을 했는가 기억이 없으므로 이는 단순하게 SSH 프로토콜을 사용하면 될 뿐인가 싶어서 [변경했습니다](https://github.com/nasa9084/dotfiles/blob/a55ab8c0d44bbda1d9fff398ac3e3a69a79be274/.gitconfig).
+Github에 의하면 계속 git 프로토콜 접속은 읽기 전용이었던 것 같습니다만, 명확히 pushInsteadOf에서 [git@github.com](mailto:git@github.com)를 사용하는 설정까지 적혀있으므로, 지금까지 문제없이 사용할 수 있었던 것 같습니다. 저 자신도 왜 이런 설정을 했는가 기억이 없으므로 이는 단순하게 SSH 프로토콜을 사용하면 될 뿐인가 싶어서 [변경했습니다](https://github.com/nasa9084/dotfiles/blob/a55ab8c0d44bbda1d9fff398ac3e3a69a79be274/.gitconfig).
 
 ```git
 [url "git@github.com:"]
