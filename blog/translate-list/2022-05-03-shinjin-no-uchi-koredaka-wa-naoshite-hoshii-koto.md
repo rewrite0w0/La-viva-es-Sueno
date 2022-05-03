@@ -1,6 +1,6 @@
 ---
 slug: 2022-05-03-shinjin-no-uchi-koredaka-wa-naoshite-hoshii-koto
-title: 신입일 때 바로 잡았으면 하는 것
+title: 신입 때 바로 잡았으면 하는 것
 authors: rewrite0w0
 tags: [mindset, 번역]
 ---
@@ -15,7 +15,7 @@ tags: [mindset, 번역]
 
 어디까지는 업무상에서 전제이므로,
 
-주말에 공부않는다 말 것 등은 들어가 있지 않습니다.
+주말에 공부않는다 등은 들어가 있지 않습니다.
 
 ## 안한 걸 했다, 거짓말 말자.
 
