@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkla_viva_es_sueno=self.webpackChunkla_viva_es_sueno||[]).push([[3744],{6091:function(e){e.exports=JSON.parse('{"permalink":"/La-viva-es-Sueno/blog/tags/\ubc88\uc5ed","page":1,"postsPerPage":10,"totalPages":5,"totalCount":45,"nextPage":"/La-viva-es-Sueno/blog/tags/\ubc88\uc5ed/page/2","blogDescription":"Blog","blogTitle":"Blog"}')}}]);
