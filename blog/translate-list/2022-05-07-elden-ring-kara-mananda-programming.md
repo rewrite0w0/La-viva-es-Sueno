@@ -76,7 +76,7 @@ tags: [mindset, 번역]
 ![game over, retry?](https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F93703%2F18991428-ccc3-47f7-4707-9d92878dceb9.png?ixlib=rb-4.0.0&auto=format&gif-q=60&q=75&w=1400&fit=max&s=9e688ff14b7f79d1d08449b6ef562ec6)
 
 - 우선 손을 움직이며 코드를 적고, 프로그램을 동작시켜 봅시다.
-- **프로그래밍 학습은 初見殺し가 가득**합니다.
+- **프로그래밍 학습은 순간 삭제 공격이 가득**합니다.
 - 역으로 말하면 **과거에 그 패턴에 만단 적이 있었다 어떤가로 승패가 결정되는** 경우도 많습니다.
 - 에러와 만나면, 적의 공격 패턴이 강렬하게 인상에 남습니다. **그러니 다음에는 괜찮습니다**. 다음에는 우측을 조심하자.
 - **몇 번이고 코드를 적고, 적의 공격(에러) 패턴을 몸에 익히도록 합시다**
