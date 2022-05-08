@@ -82,7 +82,7 @@ tags: [mindset, 번역]
 - **몇 번이고 코드를 적고, 적의 공격(에러) 패턴을 몸에 익히도록 합시다**
 - 코드를 적고 에러가 발생하면 개이득입니다. **그 에러가 당신을 강하게 해줍니다.**
 
-## 6. 장비는 강화하는 것 효과적
+## 6. 장비는 강화하는 것이 효과적
 
 ![upgrade item](https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F93703%2F647bec84-f564-59dc-aea8-f6df69320954.png?ixlib=rb-4.0.0&auto=format&gif-q=60&q=75&w=1400&fit=max&s=6c68233087e89c5b181130d6285a9a8e)
 
