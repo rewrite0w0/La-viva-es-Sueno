@@ -1,6 +1,6 @@
 ---
 slug: 2022-05-09-npm-scripts-wo-kaku-doki-no-tekuse
-title: npm-scripts를 적을 때 버릇
+title: npm-scripts를 적을 때 습관
 authors: rewrite0w0
 tags: [node.js, 번역]
 ---
@@ -11,7 +11,7 @@ tags: [node.js, 번역]
 
 긴 시간 사용하면 노하우가 쌓여서, "이렇게 쓰면 깔끔하다" "나중에 확장하고 싶을 때, 간단하게 확장할 수 있다" 같이 적는 방법을 몸 익혔다. 내 경우 어느 정도 습관이 있다 생각한다.
 
-모처럼이니, [id:mizdra](http://blog.hatena.ne.jp/mizdra/)의 npm-scripts를 쓸 때 버릇을 공유하겠다.
+모처럼이니, [id:mizdra](http://blog.hatena.ne.jp/mizdra/)의 npm-scripts를 쓸 때 습관을 공유하겠다.
 
 ## 기본형
 
