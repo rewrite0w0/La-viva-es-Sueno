@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkla_viva_es_sueno=self.webpackChunkla_viva_es_sueno||[]).push([[9003],{4592:function(a){a.exports=JSON.parse('{"label":"blitz","permalink":"/La-viva-es-Sueno/blog/tags/blitz","allTagsPath":"/La-viva-es-Sueno/blog/tags","count":1}')}}]);

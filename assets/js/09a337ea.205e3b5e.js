@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkla_viva_es_sueno=self.webpackChunkla_viva_es_sueno||[]).push([[7449],{7907:function(a){a.exports=JSON.parse('{"label":"agile","permalink":"/La-viva-es-Sueno/blog/tags/agile","allTagsPath":"/La-viva-es-Sueno/blog/tags","count":1}')}}]);

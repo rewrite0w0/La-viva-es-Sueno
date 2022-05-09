@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkla_viva_es_sueno=self.webpackChunkla_viva_es_sueno||[]).push([[1191],{9625:function(a){a.exports=JSON.parse('{"label":"haskell","permalink":"/La-viva-es-Sueno/blog/tags/haskell","allTagsPath":"/La-viva-es-Sueno/blog/tags","count":1}')}}]);

@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkla_viva_es_sueno=self.webpackChunkla_viva_es_sueno||[]).push([[5534],{9914:function(e){e.exports=JSON.parse('{"allTagsPath":"/La-viva-es-Sueno/blog/tags","name":"typescript","count":3,"permalink":"/La-viva-es-Sueno/blog/tags/typescript"}')}}]);

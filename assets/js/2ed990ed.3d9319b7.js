@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkla_viva_es_sueno=self.webpackChunkla_viva_es_sueno||[]).push([[559],{3675:function(e){e.exports=JSON.parse('{"label":"recoil","permalink":"/La-viva-es-Sueno/blog/tags/recoil","allTagsPath":"/La-viva-es-Sueno/blog/tags","count":1}')}}]);

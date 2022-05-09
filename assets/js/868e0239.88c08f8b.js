@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkla_viva_es_sueno=self.webpackChunkla_viva_es_sueno||[]).push([[4179],{9906:function(e){e.exports=JSON.parse('{"label":"prettier","permalink":"/La-viva-es-Sueno/blog/tags/prettier","allTagsPath":"/La-viva-es-Sueno/blog/tags","count":1}')}}]);
