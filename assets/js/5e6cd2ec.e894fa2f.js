@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkla_viva_es_sueno=self.webpackChunkla_viva_es_sueno||[]).push([[7015],{2277:function(e){e.exports=JSON.parse('{"label":"architecture","permalink":"/La-viva-es-Sueno/blog/tags/architecture","allTagsPath":"/La-viva-es-Sueno/blog/tags","count":4}')}}]);
