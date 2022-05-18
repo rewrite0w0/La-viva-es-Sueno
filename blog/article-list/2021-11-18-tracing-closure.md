@@ -612,6 +612,12 @@ count값을 0으로 한다 그리고 반환되는 함수 push가 대응표를 �
 
 이것을 `닫았다`라 표현한다
 
+[MDN JavaScript 재입문](https://developer.mozilla.org/ko/docs/Web/JavaScript/A_re-introduction_to_JavaScript#%ED%81%B4%EB%A1%9C%EC%A0%80_closures)하기 중에는...
+
+클로저는 JavaScript가 제공하는 가장 강력한 추상화이며, 동시에 잠재적으로 가장 혼란스러울 수 있는 개념입니다. 다음 함수는 무엇을 하는 걸까요?
+
+클로저는 함수와 함수에 의해 생성되는 스코프 객체를 함께 지칭하는 용어입니다. 클로저는 상태를 저장할 수 있기 때문에 보통 객체를 대신하곤 합니다. 다음 글을 통해 [클로저에 대한 여러 훌륭한 설명](https://stackoverflow.com/questions/111102/how-do-javascript-closures-work)을 확인할 수 있습니다.
+
 ### 결론적으로 클로저란
 
 클로저는 함수형 프로그래밍에서 중요한 개념이다.
