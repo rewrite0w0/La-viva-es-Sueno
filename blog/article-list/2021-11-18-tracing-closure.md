@@ -5,6 +5,8 @@ authors: rewrite0w0
 tags: [javascript, closure, functional programming, 감상]
 ---
 
+## 동기
+
 다음과 같은 글을 읽었다.
 
 [Javascript Closure는 Private 변수 만드는 용도인가?](https://medium.com/naver-place-dev/javascript-closure%EB%8A%94-private-%EB%B3%80%EC%88%98-%EB%A7%8C%EB%93%9C%EB%8A%94-%EC%9A%A9%EB%8F%84%EC%9D%B8%EA%B0%80-d5868489c421)
@@ -63,7 +65,7 @@ _내가 빡대가리인건가?_
 
 **어휘적 환경의 조합**, **유효범위**를 알아야 한다.
 
-### 어휘적 범위 지정?
+## 어휘적 범위 지정?
 
 어휘적 범위 지정(lexical scoping) 과정에서 변수가 어디에서 사용 가능한지 알기 위해 그 변수가 소스코드 내 어디에서 선언되었는지 고려한다는 것을 의미한다. 단어 "lexical"은 이런 사실을 나타낸다. 중첩된 함수는 외부 범위(scope)에서 선언한 변수에도 접근할 수 있다.
 
@@ -89,7 +91,7 @@ init();
 
 **아무튼 어휘적 범위 지정에서 범위가 중요한 단어라는 것을 알게되었다.**
 
-### 그래서 클로저는...?
+## 그래서 클로저는...?
 
 우선 예시를 보았다,
 
@@ -284,7 +286,7 @@ console.log(add10(2)); // 112 (x:10 + y:100 + z:2)
 
 크게보면 개념이나 기능이나 함수나 결국 뭔가 한다는 거 아닌가?
 
-### 아무튼 정리하면 이렇게 된다.
+## 아무튼 정리하면 이렇게 된다.
 
 클로저는 함수형 프로그래밍에서 중요한 개념이다.
 
@@ -298,11 +300,11 @@ console.log(add10(2)); // 112 (x:10 + y:100 + z:2)
 
 ---
 
-### 추가 메모
+## 추가 메모
 
 문득 가지고 있던 책 중에
 
-더글러스 크락포드의 [자바스크립트는 왜 그모양일까?](https://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788966262595&orderClick=LAG&Kc=)가 생각났다.
+### 더글러스 크락포드의 [자바스크립트는 왜 그모양일까?](https://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788966262595&orderClick=LAG&Kc=)가 생각났다.
 
 여기서는 클로저를
 
@@ -320,7 +322,7 @@ console.log(add10(2)); // 112 (x:10 + y:100 + z:2)
 
 로 적어두었으며,
 
-Haskell 문서에서는
+### Haskell 문서에서는
 
 > Closure는 컴비네이터의 반대어로, 자유변수를 이용하는 함수를 지칭, 클로저는 환경의 어떤 부분을 [닫는다]이다.
 >
@@ -330,9 +332,9 @@ Haskell 문서에서는
 >
 > 재밌는 점은, x가 구속되어있는 컨텍스트는 더 이상 존재하지않으면서, 람다 추상이 x의 주변을 닫아뒀으면 존재하지 않았을 것이다.
 
-Rust에서는
+### Rust에서는
 
-1판
+#### 1판
 
 > 흔히, 함수와 자유변수를 하나로 묶은 코드의 명확함이나 재이용에 도움이 됩니다.
 >
@@ -340,7 +342,7 @@ Rust에서는
 >
 > 그 덕에 이러한 정리를 **클로저**라 부르며, Rust는 클로저가 꽤 훌륭하고 좋게 구현되어 있습니다.
 
-2판
+#### 2판
 
 > 환경을 캡처하는 익명함수.
 >
@@ -352,7 +354,7 @@ Rust에서는
 >
 > 여기서 클로저의 기능인 코드의 재이용이나, 동작의 커스터마이즈를 하는 방법을 생각해봅시다.
 
-2판 한국어판
+#### 2판 한국어판
 
 > 러스트의 클로저는 변수에 저장하거나 다른 함수에 인자로 넘길 수 있는 익명 함수입니다.
 >
@@ -362,13 +364,13 @@ Rust에서는
 >
 > 이 클로저 특성이 코드 재사용과 동작 사용자 정의를 어떤 식으로 허용하는지 예를 들어 보여줄 것입니다.
 
-[한국어 위키](<https://ko.wikipedia.org/wiki/%ED%81%B4%EB%A1%9C%EC%A0%80_(%EC%BB%B4%ED%93%A8%ED%84%B0_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D)>)
+### [한국어 위키](<https://ko.wikipedia.org/wiki/%ED%81%B4%EB%A1%9C%EC%A0%80_(%EC%BB%B4%ED%93%A8%ED%84%B0_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D)>)
 
 > 컴퓨터 언어에서 클로저(Closure)는 일급 객체 함수(first-class functions)의 개념을 이용하여 스코프(scope)에 묶인 변수를 바인딩 하기 위한 일종의 기술이다.
 >
 > 기능상으로, 클로저는 함수를 저장한 레코드(record)이며, 스코프(scope)의 인수(Factor)들은 클로저가 만들어질 때 정의(define)되며, 스코프 내의 영역이 소멸(remove)되었어도 그에 대한 접근(access)은 독립된 복사본인 클로저를 통해 이루어질 수 있다.
 
-[영어 위키](<https://en.wikipedia.org/wiki/Closure_(computer_programming)>)
+### [영어 위키](<https://en.wikipedia.org/wiki/Closure_(computer_programming)>)
 
 > 프로그래밍에서 클로저(혹은 lexical closure, function closure)는 1급 함수를 갖는 언어에서 렉시컬 스코프에 의한 name binding을 구현하기 위한 수법 중 하나이다.
 >
@@ -378,7 +380,7 @@ Rust에서는
 >
 > 일반 함수와 달리 클로저를 사용하면 함수가 범위 밖에서 호출되는 경우에도 함수가 해당 값, 참조의 클로저 복사본을 통해 캡처된 변수에 접근할 수 있다.
 
-[일본어 위키](https://ja.wikipedia.org/wiki/%E3%82%AF%E3%83%AD%E3%83%BC%E3%82%B8%E3%83%A3)
+### [일본어 위키](https://ja.wikipedia.org/wiki/%E3%82%AF%E3%83%AD%E3%83%BC%E3%82%B8%E3%83%A3)
 
 > 함수포폐는 프로그래밍에서 함수객체의 일종
 >
@@ -559,7 +561,7 @@ bar
 >    ...중략...
 >    현대적인 Scheme 처리 언어 계통에서는 클로저에 사용될 가능성 있는 로컬 변수는 동적으로 확보하며, 그렇지 않으면 스택에 확보하는 최적화를 하는 경우가 잦다.
 
-코딩을 지탱하는 기술
+### 코딩을 지탱하는 기술
 
 > 객체와 클래스 中 변수와 함수를 합쳐서 모형을 만드는 법: 방법3 클로저
 
@@ -612,13 +614,13 @@ count값을 0으로 한다 그리고 반환되는 함수 push가 대응표를 �
 
 이것을 `닫았다`라 표현한다
 
-[MDN JavaScript 재입문](https://developer.mozilla.org/ko/docs/Web/JavaScript/A_re-introduction_to_JavaScript#%ED%81%B4%EB%A1%9C%EC%A0%80_closures)하기 중에는...
+### [MDN JavaScript 재입문](https://developer.mozilla.org/ko/docs/Web/JavaScript/A_re-introduction_to_JavaScript#%ED%81%B4%EB%A1%9C%EC%A0%80_closures)하기 중에는...
 
 클로저는 JavaScript가 제공하는 가장 강력한 추상화이며, 동시에 잠재적으로 가장 혼란스러울 수 있는 개념입니다. 다음 함수는 무엇을 하는 걸까요?
 
 클로저는 함수와 함수에 의해 생성되는 스코프 객체를 함께 지칭하는 용어입니다. 클로저는 상태를 저장할 수 있기 때문에 보통 객체를 대신하곤 합니다. 다음 글을 통해 [클로저에 대한 여러 훌륭한 설명](https://stackoverflow.com/questions/111102/how-do-javascript-closures-work)을 확인할 수 있습니다.
 
-### 결론적으로 클로저란
+## 결론적으로 클로저란
 
 클로저는 함수형 프로그래밍에서 중요한 개념이다.
 
