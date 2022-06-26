@@ -1,6 +1,6 @@
 ---
 slug: 2022-06-26-javascript-no-kisou-wo-tobashirata
-title: JavaScript의 기본이 안 되어있는 상태에서 React, Next.js를 사용하면 걸린 에러 3선
+title: JavaScript의 기본이 안 되어있는 상태에서 React, Next.js를 사용하면 걸릴 에러 3선
 authors: rewrite0w0
 tags: [번역, JavaScript, react, next.js]
 ---
