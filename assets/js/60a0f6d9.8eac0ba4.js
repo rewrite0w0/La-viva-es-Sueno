@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkla_viva_es_sueno=self.webpackChunkla_viva_es_sueno||[]).push([[7222],{1364:function(e){e.exports=JSON.parse('{"permalink":"/La-viva-es-Sueno/blog/tags/react/page/2","page":2,"postsPerPage":10,"totalPages":2,"totalCount":12,"previousPage":"/La-viva-es-Sueno/blog/tags/react","blogDescription":"Blog","blogTitle":"Blog"}')}}]);
